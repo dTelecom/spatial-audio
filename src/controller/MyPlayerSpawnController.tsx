@@ -19,6 +19,7 @@ export function MyPlayerSpawnController({
   useEffect(() => {
     if (myPlayer === null && localParticipant?.identity && localCharacter) {
       setMyPlayer({
+        name: localParticipant.name || localParticipant.identity,
         username: localParticipant.identity,
         position: { x: 10, y: 0 },
         animation: "idle_left",

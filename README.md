@@ -23,9 +23,8 @@ Create a new LiveKit project at <http://cloud.livekit.io>. Then create a new key
 Create a new file at `spatial-audio/.env.development` and add your new API key and secret as well as your project's WebSocket URL (found at the top of <http://cloud.livekit.io>):
 
 ```
-LIVEKIT_API_KEY=<your api key>
-LIVEKIT_API_SECRET=<your api secret>
-LIVEKIT_WS_URL=wss://<your-project>.livekit.cloud
+API_KEY=<your api key>
+API_SECRET=<your api secret>
 ```
 
 (Note: this file is in `.gitignore`. Never commit your API secret to git.)
@@ -42,7 +41,7 @@ You can test it by opening <http://localhost:3000> in a browser.
 
 This demo is a Next.js app. You can deploy to your Vercel account with one click:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flivekit-examples%2Fspatial-audio&env=LIVEKIT_API_KEY,LIVEKIT_API_SECRET,LIVEKIT_WS_URL&envDescription=Get%20these%20from%20your%20cloud%20livekit%20project.&envLink=https%3A%2F%2Fcloud.livekit.io&project-name=my-spatial-audio-app)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/dTelecom/spatial-audio&env=API_KEY,API_SECRET&envDescription=Get%20these%20from%20your%20cloud%20livekit%20project.&envLink=https%3A%2F%2Fcloud.livekit.io&project-name=my-spatial-audio-app)
 
 Refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more about deploying to a production environment.
 

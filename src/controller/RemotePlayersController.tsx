@@ -1,12 +1,12 @@
 "use-client";
 
-import { CharacterName } from "@/components/CharacterSelector";
-import { AnimationState } from "@/model/AnimationState";
-import { Player } from "@/model/Player";
-import { Vector2 } from "@/model/Vector2";
-import { useRemoteParticipants } from "@livekit/components-react";
-import { Dispatch, SetStateAction, useCallback, useMemo, useRef } from "react";
-import { useInterval } from "react-use";
+import {CharacterName} from "@/components/CharacterSelector";
+import {AnimationState} from "@/model/AnimationState";
+import {Player} from "@/model/Player";
+import {Vector2} from "@/model/Vector2";
+import {useRemoteParticipants} from "@livekit/components-react";
+import {Dispatch, SetStateAction, useCallback, useMemo} from "react";
+import {useInterval} from "react-use";
 
 type Props = {
   networkPositions: Map<string, Vector2>;
@@ -15,10 +15,10 @@ type Props = {
 };
 
 export function RemotePlayersController({
-  networkPositions,
-  networkAnimations,
-  setRemotePlayers,
-}: Props) {
+                                          networkPositions,
+                                          networkAnimations,
+                                          setRemotePlayers,
+                                        }: Props) {
   const remoteParticipants = useRemoteParticipants({});
 
   const remoteCharacterLookup = useMemo(() => {
@@ -32,7 +32,10 @@ export function RemotePlayersController({
 
   const applyNetworkValues = useCallback(() => {
     setRemotePlayers((previousRemotePlayers) => {
-      const participantIdentities = remoteParticipants.map((rp) => rp.identity);
+      const participantIdentities = remoteParticipants.map((rp) => ({
+        identity: rp.identity,
+        name: rp.name || rp.identity
+      }));
       const previousPlayersLookup = new Map<string, Player>();
       for (const rp of previousRemotePlayers) {
         previousPlayersLookup.set(rp.username, rp);
@@ -43,10 +46,11 @@ export function RemotePlayersController({
       // react updates working
       const newRemotePlayers: Player[] = participantIdentities
         .filter(
-          (identity) =>
+          ({identity, name}) =>
             networkAnimations.has(identity) && networkPositions.has(identity)
         )
-        .map((identity) => ({
+        .map(({identity, name}) => ({
+          name: name,
           username: identity,
           position:
             previousPlayersLookup.get(identity)?.position ||

@@ -8,6 +8,10 @@ export function MicrophoneMuteButton() {
         source={Track.Source.Microphone}
         className="btn button-primary w-10 h-full p-0 m-0 px-1"
       />
+      <TrackToggle
+        source={Track.Source.Camera}
+        className="btn button-primary w-10 h-full p-0 m-0 px-1"
+      />
     </div>
   );
 }

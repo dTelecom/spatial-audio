@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	color-scheme: dark;
+}
+
+html,
+body,
+#__next,
+main {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	background: #111;
+	font-family: Inter, serif;
+	color: #FFFFFF;
+}
+
+main {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	justify-content: center;
+	place-content: center;
+	justify-items: center;
+	padding-top: 96px;
+	padding-bottom: 45px;
+}
+
+.bg-green {
+	background-color: #59E970;
+	color: #252728;
+}
+
+.lk-room-container {
+	position: initial !important;
+}
+
+.lk-button[data-lk-source="microphone"], .lk-button[data-lk-source="camera"] {
+	height: 32px;
+	width: 32px;
+	background: #59E970;
+	display: flex;
+	min-height: 0;
+	border-radius: 5px;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin-left: 12px;
+	color: black;
+
+	&[data-lk-enabled="false"] {
+		background: #2E3031;
+		color: #FFFFFF;
+	}
+}
+
+.select {
+	font-size: 14px;
+	height: 32px;
+	border-radius: 5px;
+	background-color: transparent;
+	color: #FFFFFF;
+	margin: 0;
+	line-height: 140%;
+	min-height: 0;
+	background-image: none;
+}
+
+.lk-participant-media-video {
+	width: 96px;
+	height: 96px;
+	border-radius: 50%;
+	object-fit: cover;
+	position: relative;
+	z-index: 2;
+}
+
+.lk-participant-tile {
+	width: 96px;
+	height: 96px;
+	border: 4px solid transparent;
+	background: rgba(0,0,0,0.2);
+	border-radius: 50%;
+	box-sizing: content-box;
+
+	&[data-lk-video-muted="true"] > .lk-participant-media-video {
+		opacity: 0;
+	}
+}
+
+.lk-participant-metadata {
+	margin-top: 12px;
+
+	.lk-participant-metadata-item {
+		display: flex;
+		justify-content: center;
+
+		.lk-participant-name {
+			width: 96px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			text-align: center;
+			white-space: nowrap;
+		}
+	}
+}
+
+.lk-participant-placeholder {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.lk-participant-placeholder > svg {
+	transform: scale(0.6);
+}
+
+.lk-tracks-row {
+	display: flex;
+	z-index: 1;
+	position: absolute;
+	top: 80px;
+	gap: 8px;
+	overflow-x: auto;
+	overflow-y: visible;
+	height: 146px;
+}
+.lk-tracks-row::-webkit-scrollbar {
+	display: none;
+}

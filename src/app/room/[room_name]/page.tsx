@@ -1,33 +1,32 @@
 "use client";
 
-import { WebAudioContext } from "@/providers/audio/webAudio";
-import { BottomBar } from "@/components/BottomBar";
-import { RoomInfo } from "@/components/RoomInfo";
-import { UsernameInput } from "@/components/UsernameInput";
-import {
-  ConnectionDetails,
-  ConnectionDetailsBody,
-} from "@/pages/api/connection_details";
-import { LiveKitRoom } from "@livekit/components-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
-import {
-  CharacterName,
-  CharacterSelector,
-} from "@/components/CharacterSelector";
-import { useMobile } from "@/util/useMobile";
-import { GameView } from "@/components/GameView";
+import {WebAudioContext} from "@/providers/audio/webAudio";
+import {BottomBar} from "@/components/BottomBar";
+import {ConnectionDetails, ConnectionDetailsBody,} from "@/pages/api/connection_details";
+import {LiveKitRoom} from "@livekit/components-react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
+import {toast, Toaster} from "react-hot-toast";
+import {CharacterName, CharacterSelector,} from "@/components/CharacterSelector";
+import {useMobile} from "@/util/useMobile";
+import {GameView} from "@/components/GameView";
+import {Input} from "@/components/Input/Input";
+import UserIcon from "@/components/icons/user.svg";
+import {Button} from "@/components/Button";
+import styles from "./Page.module.scss";
+import {NavBar} from "@/components/NavBar/NavBar";
+import {Footer} from "@/components/Footer/Footer";
+import {RoomNavBar} from "@/components/RoomNavBar/RoomNavBar";
 
 type Props = {
   params: { room_name: string };
 };
 
-export default function Page({ params: { room_name } }: Props) {
+export default function Page({params: {room_name}}: Props) {
+  const [username, setUsername] = useState("");
   const [connectionDetails, setConnectionDetails] =
     useState<ConnectionDetails | null>(null);
   const [selectedCharacter, setSelectedCharacter] =
     useState<CharacterName>("doux");
-  const isMobile = useMobile();
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
 
   useEffect(() => {
@@ -53,14 +52,14 @@ export default function Page({ params: { room_name } }: Props) {
       };
       const response = await fetch("/api/connection_details", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body),
       });
       if (response.status === 200) {
         return response.json();
       }
 
-      const { error } = await response.json();
+      const {error} = await response.json();
       throw error;
     },
     [room_name, selectedCharacter]
@@ -73,62 +72,93 @@ export default function Page({ params: { room_name } }: Props) {
   // If we don't have any connection details yet, show the username form
   if (connectionDetails === null) {
     return (
-      <div className="w-screen h-screen flex flex-col items-center justify-center">
-        <Toaster />
-        <h2 className="text-4xl mb-4">{humanRoomName}</h2>
-        <RoomInfo roomName={room_name} />
-        <div className="divider"></div>
-        <CharacterSelector
-          selectedCharacter={selectedCharacter}
-          onSelectedCharacterChange={setSelectedCharacter}
-        />
-        <UsernameInput
-          submitText="Join Room"
-          onSubmit={async (username) => {
-            try {
-              // TODO unify this kind of pattern across examples, either with the `useToken` hook or an equivalent
-              const connectionDetails = await requestConnectionDetails(
-                username
-              );
-              setConnectionDetails(connectionDetails);
-            } catch (e: any) {
-              toast.error(e);
-            }
-          }}
-        />
-      </div>
+      <>
+        <NavBar/>
+        <Toaster/>
+        <div className={styles.container}>
+
+          <h2 className="text-4xl mb-2.5 font-bold break-all text-center px-2 max-w-2xl">{humanRoomName}</h2>
+
+          <div className="mb-2.5"></div>
+
+          <CharacterSelector
+            selectedCharacter={selectedCharacter}
+            onSelectedCharacterChange={setSelectedCharacter}
+          />
+
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              try {
+                // TODO unify this kind of pattern across examples, either with the `useToken` hook or an equivalent
+                const connectionDetails = await requestConnectionDetails(
+                  username
+                );
+                setConnectionDetails(connectionDetails);
+              } catch (e: any) {
+                toast.error(e);
+              }
+            }}
+          >
+            <Input
+              placeholder={"Enter your name"}
+              value={username}
+              setValue={setUsername}
+              startIcon={<UserIcon/>}
+            />
+            <Button
+              type={"submit"}
+              variant={"default"}
+              size={"lg"}
+              className={styles.button}
+              disabled={!username && username.length < 3}
+            >
+              Join
+            </Button>
+          </form>
+        </div>
+
+        <Footer/>
+      </>
     );
   }
 
   // Show the room UI
   return (
-    <div>
-      <LiveKitRoom
-        token={connectionDetails.token}
-        serverUrl={connectionDetails.ws_url}
-        connect={true}
-        connectOptions={{ autoSubscribe: false }}
-        options={{ expWebAudioMix: { audioContext } }}
-      >
-        <WebAudioContext.Provider value={audioContext}>
-          <div className="flex h-screen w-screen">
-            <div
-              className={`flex ${
-                isMobile ? "flex-col-reverse" : "flex-col"
-              } w-full h-full`}
-            >
-              <div className="grow flex">
-                <div className="grow">
-                  <GameView />
+    <>
+      <div className={styles.container}>
+        <LiveKitRoom
+          token={connectionDetails.token}
+          serverUrl={connectionDetails.ws_url}
+          connect={true}
+          connectOptions={{autoSubscribe: false}}
+          options={{expWebAudioMix: {audioContext}, dynacast: false}}
+          video={false}
+          audio={true}
+        >
+          <RoomNavBar
+            title={room_name}
+            small
+          />
+
+          <WebAudioContext.Provider value={audioContext}>
+            <div className="flex h-screen w-screen">
+              <div
+                className={`flex flex-col w-full h-full`}
+              >
+                <div className="grow flex">
+                  <div className="grow">
+                    <GameView/>
+                  </div>
+                </div>
+                <div className="bg-neutral">
+                  <BottomBar/>
                 </div>
               </div>
-              <div className="bg-neutral">
-                <BottomBar />
-              </div>
             </div>
-          </div>
-        </WebAudioContext.Provider>
-      </LiveKitRoom>
-    </div>
+          </WebAudioContext.Provider>
+        </LiveKitRoom>
+      </div>
+    </>
   );
 }

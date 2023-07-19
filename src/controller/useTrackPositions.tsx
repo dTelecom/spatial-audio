@@ -12,17 +12,17 @@ import { useEffect, useMemo, useState } from "react";
 import { TrackPosition } from "./SpatialAudioController";
 
 type Props = {
-  jukeBoxPosition: Vector2;
   remotePlayers: Player[];
 };
 
 export const useTrackPositions = ({
-  jukeBoxPosition,
   remotePlayers,
 }: Props) => {
   const [sourceFilter] = useState([
+    Track.Source.Camera,
     Track.Source.Microphone,
     Track.Source.Unknown,
+    Track.Source.ScreenShare
   ]);
   const [sourceOptions] = useState({
     updateOnlyOn: [
@@ -34,19 +34,12 @@ export const useTrackPositions = ({
     onlySubscribed: false,
   });
   const trackParticipantPairs = useTracks(sourceFilter, sourceOptions);
+
   const trackPositions: TrackPosition[] = useMemo(() => {
     const microphoneTrackLookup = new Map<string, TrackReference>();
-    let jukeboxTrackPublication: TrackPublication | null = null;
-    let jukeboxParticipant: Participant | null = null;
 
-    // Memoize all of the remote microphone tracks and the jukebox track
+    // Memoize all of the remote microphone tracks
     trackParticipantPairs.forEach((tpp) => {
-      if (tpp.publication.trackName === "jukebox") {
-        jukeboxTrackPublication = tpp.publication;
-        jukeboxParticipant = tpp.participant;
-        return;
-      }
-
       microphoneTrackLookup.set(tpp.participant.identity, tpp);
     });
 
@@ -60,15 +53,8 @@ export const useTrackPositions = ({
         };
       });
 
-    if (jukeboxTrackPublication) {
-      res.push({
-        trackPublication: jukeboxTrackPublication,
-        position: jukeBoxPosition,
-        participant: jukeboxParticipant!,
-      });
-    }
     return res;
-  }, [trackParticipantPairs, remotePlayers, jukeBoxPosition]);
+  }, [trackParticipantPairs, remotePlayers]);
 
   return trackPositions;
 };

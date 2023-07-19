@@ -1,26 +1,18 @@
-import { useMobile } from "@/util/useMobile";
-import { GithubLink } from "./GithubLink";
-import { MicrophoneMuteButton } from "./MicrophoneMuteButton";
-import { MicrophoneSelector } from "./MicrophoneSelector";
-import { PoweredByLiveKit } from "./PoweredByLiveKit";
+import {MicrophoneMuteButton} from "./MicrophoneMuteButton";
+import {MicrophoneSelector} from "./MicrophoneSelector";
+import {PoweredBy} from "./PoweredBy";
 
 export function BottomBar() {
-  const mobile = useMobile();
   return (
-    <div className="flex w-full h-full justify-between">
+    <div className="flex w-full h-full justify-between" style={{background: '#000'}}>
       <div className="flex h-full">
-        <MicrophoneMuteButton />
+        <MicrophoneMuteButton/>
         <div className="">
-          <MicrophoneSelector />
+          <MicrophoneSelector/>
         </div>
       </div>
       <div className="pr-2 flex">
-        {!mobile && (
-          <div className="pr-2">
-            <GithubLink />
-          </div>
-        )}
-        <PoweredByLiveKit />
+        <PoweredBy/>
       </div>
     </div>
   );

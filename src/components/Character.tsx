@@ -9,6 +9,7 @@ type Props = {
   x: number;
   y: number;
   speaking: boolean;
+  name: string;
   username: string;
   animation: AnimationState;
   character: CharacterName;
@@ -17,6 +18,7 @@ type Props = {
 export function Character({
   x,
   y,
+  name,
   username,
   animation,
   speaking,
@@ -52,7 +54,7 @@ export function Character({
         anchor={[0.5, 1]}
         x={0}
         y={-60}
-        text={username}
+        text={name}
         style={
           new TextStyle({
             fill: "0xffffff",
