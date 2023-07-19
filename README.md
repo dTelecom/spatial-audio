@@ -4,10 +4,6 @@
 
 This is a demo of spatial audio using LiveKit. Users join a little 2D world, and hear other users' audio in stereo, based on their position and distance relative to you.
 
-## Online demo
-
-You can try an online demo right now at <https://spatial-audio-demo.livekit.io/>.
-
 ## Running locally
 
 Clone the repo and install dependencies:
@@ -18,7 +14,7 @@ cd spatial-audio
 npm install
 ```
 
-Create a new LiveKit project at <http://cloud.livekit.io>. Then create a new key in your [project settings](https://cloud.livekit.io/projects/p_/settings/keys).
+Create a new project at <https://test-cloud.dtelecom.org>. Then create a new key in your [project settings](https://test-cloud.dtelecom.org/settings).
 
 Create a new file at `spatial-audio/.env.development` and add your new API key and secret as well as your project's WebSocket URL (found at the top of <http://cloud.livekit.io>):
 
