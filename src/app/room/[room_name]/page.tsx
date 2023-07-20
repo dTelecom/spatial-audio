@@ -15,12 +15,14 @@ import styles from "./Page.module.scss";
 import {NavBar} from "@/components/NavBar/NavBar";
 import {Footer} from "@/components/Footer/Footer";
 import {RoomNavBar} from "@/components/RoomNavBar/RoomNavBar";
+import { useSearchParams} from "next/navigation";
 
 type Props = {
   params: { room_name: string };
 };
 
-export default function Page({params: {room_name}}: Props) {
+export default function Page({params: {room_name} }: Props) {
+  const query = useSearchParams();
   const [username, setUsername] = useState("");
   const [connectionDetails, setConnectionDetails] =
     useState<ConnectionDetails | null>(null);
@@ -48,6 +50,7 @@ export default function Page({params: {room_name}}: Props) {
         room_name,
         username,
         character: selectedCharacter,
+        randomIp: query.get('randomIp') || undefined,
       };
       const response = await fetch("/api/connection_details", {
         method: "POST",

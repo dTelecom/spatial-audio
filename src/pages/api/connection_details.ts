@@ -9,6 +9,7 @@ export type ConnectionDetailsBody = {
   room_name: string;
   username: string;
   character: CharacterName;
+  randomIp?: string;
 };
 
 export type ConnectionDetails = {
@@ -32,6 +33,7 @@ export default async function handler(
     username,
     room_name: room,
     character,
+    randomIp,
   } = req.body as ConnectionDetailsBody;
   const apiKey = process.env.API_KEY;
   const apiSecret = process.env.API_SECRET;
@@ -50,7 +52,7 @@ export default async function handler(
     {identity: generateUUID(), name: username}
   );
 
-  const clientIp = requestIp.getClientIp(req) || undefined;
+  const clientIp = randomIp !== undefined ? undefined : requestIp.getClientIp(req) || undefined;
 
   const wsUrl = await token.getWsUrl(clientIp);
 
