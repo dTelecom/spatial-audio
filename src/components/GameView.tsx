@@ -182,6 +182,7 @@ export function GameView() {
           <ArrowLeftIcon/>
         </div>
       )}
+
       <div
         ref={videoContainerRef}
         className={'lk-tracks-row'}
@@ -201,8 +202,8 @@ export function GameView() {
             maxHearableDistance={earshotRadius}
           />
         </TrackLoop>
-
       </div>
+
       {showArrows && !mobile && (
         <div
           style={{

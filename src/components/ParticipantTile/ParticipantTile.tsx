@@ -1,11 +1,10 @@
 import * as React from 'react';
-import {useMemo} from 'react';
+import {useEffect, useMemo} from 'react';
 import type {Participant, TrackPublication} from 'livekit-client';
 import {Track} from 'livekit-client';
 import type {ParticipantClickEvent, TrackReferenceOrPlaceholder} from '@livekit/components-core';
 import {isParticipantSourcePinned, setupParticipantTile} from '@livekit/components-core';
 import {
-  AudioTrack,
   FocusToggle,
   ParticipantContext,
   ParticipantName,
@@ -21,8 +20,6 @@ import {
 import {mergeProps} from "./utils";
 import {Vector2} from "@/model/Vector2";
 import {TrackPosition} from "@/controller/SpatialAudioController";
-import {Text} from "@pixi/react";
-import {TextStyle} from "pixi.js";
 import ParticipantPlaceholder from "./ParticipantPlaceholder";
 
 type SpatialAudioControllerProps = {
@@ -187,6 +184,21 @@ export const ParticipantTile = ({
     [distance, maxHearableDistance]
   );
 
+  const s = p.getTrack(Track.Source.Camera)?.source;
+  const publ = useMemo(() => {
+    if (s) {
+      return p.getTrack(s);
+    }
+  }, [p, s]);
+
+
+  useEffect(() => {
+    if (publ && !p.isLocal) {
+      // @ts-ignore
+      publ.setSubscribed(hearable);
+    }
+  }, [hearable, publ, p.isLocal]);
+
   const speaking = useMemo(() => speakingLookup.has(p.identity), [p.identity, speakingLookup]);
 
   if (!hearable && !trackRef.participant.isLocal) return null;
@@ -196,25 +208,18 @@ export const ParticipantTile = ({
       <ParticipantContextIfNeeded participant={trackRef.participant}>
         {children ?? (
           <>
-            {trackRef.publication?.kind === 'video' ||
-            trackRef.source === Track.Source.Camera ||
-            trackRef.source === Track.Source.ScreenShare ? (
-              <VideoTrack
-                participant={trackRef.participant}
-                source={trackRef.source}
-                publication={trackRef.publication}
-                onSubscriptionStatusChanged={handleSubscribe}
-              />
-            ) : (
-              <AudioTrack
-                participant={trackRef.participant}
-                source={trackRef.source}
-                publication={trackRef.publication}
-                onSubscriptionStatusChanged={handleSubscribe}
-              />
-            )}
+            {publ &&
+              publ?.source === Track.Source.Camera &&
+              (
+                <VideoTrack
+                  participant={trackRef.participant}
+                  source={publ?.source ?? Track.Source.Camera}
+                  publication={publ}
+                  onSubscriptionStatusChanged={handleSubscribe}
+                />
+              )}
             <div className="lk-participant-placeholder">
-              <ParticipantPlaceholder />
+              <ParticipantPlaceholder/>
             </div>
             <div className="lk-participant-metadata">
               <div className="lk-participant-metadata-item">

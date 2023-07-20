@@ -7,7 +7,6 @@ import {LiveKitRoom} from "@livekit/components-react";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {toast, Toaster} from "react-hot-toast";
 import {CharacterName, CharacterSelector,} from "@/components/CharacterSelector";
-import {useMobile} from "@/util/useMobile";
 import {GameView} from "@/components/GameView";
 import {Input} from "@/components/Input/Input";
 import UserIcon from "@/components/icons/user.svg";
