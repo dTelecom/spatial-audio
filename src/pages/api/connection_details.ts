@@ -3,6 +3,7 @@ import type {NextApiRequest, NextApiResponse} from "next";
 import {AccessToken,} from "@dtelecom/server-sdk-js";
 import {CharacterName} from "@/components/CharacterSelector";
 import {generateUUID} from "@/util/generateUUID";
+import requestIp from "request-ip";
 
 export type ConnectionDetailsBody = {
   room_name: string;
@@ -49,7 +50,9 @@ export default async function handler(
     {identity: generateUUID(), name: username}
   );
 
-  const wsUrl = await token.getWsUrl();
+  const clientIp = requestIp.getClientIp(req) || undefined;
+
+  const wsUrl = await token.getWsUrl(clientIp);
 
   if (!wsUrl) {
     return res.status(500).json({error: "Server misconfigured, ws url"});
