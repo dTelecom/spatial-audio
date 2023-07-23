@@ -40,6 +40,7 @@ main {
 }
 
 .lk-room-container {
+	flex: 1;
 	position: initial !important;
 }
 
@@ -81,18 +82,29 @@ main {
 	object-fit: cover;
 	position: relative;
 	z-index: 2;
+
+	@media (max-width: 1023px) {
+		width: 80px;
+		height: 80px;
+	}
 }
 
 .lk-participant-tile {
 	width: 96px;
 	height: 96px;
 	border: 4px solid transparent;
-	background: rgba(0,0,0,0.2);
+	background: rgba(0, 0, 0, 0.2);
 	border-radius: 50%;
 	box-sizing: content-box;
+	flex-shrink: 0;
 
 	&[data-lk-video-muted="true"] > .lk-participant-media-video {
 		opacity: 0;
+	}
+
+	@media (max-width: 1023px) {
+		width: 80px;
+		height: 80px;
 	}
 }
 
@@ -112,6 +124,10 @@ main {
 			text-overflow: ellipsis;
 			text-align: center;
 			white-space: nowrap;
+
+			@media (max-width: 1023px) {
+				width: 80px;
+			}
 		}
 	}
 }
@@ -136,6 +152,7 @@ main {
 	overflow-y: visible;
 	height: 146px;
 }
+
 .lk-tracks-row::-webkit-scrollbar {
 	display: none;
 }

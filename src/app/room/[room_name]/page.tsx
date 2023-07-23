@@ -15,13 +15,14 @@ import styles from "./Page.module.scss";
 import {NavBar} from "@/components/NavBar/NavBar";
 import {Footer} from "@/components/Footer/Footer";
 import {RoomNavBar} from "@/components/RoomNavBar/RoomNavBar";
-import { useSearchParams} from "next/navigation";
+import {useSearchParams} from "next/navigation";
+import {useMobile} from "@/util/useMobile";
 
 type Props = {
   params: { room_name: string };
 };
 
-export default function Page({params: {room_name} }: Props) {
+export default function Page({params: {room_name}}: Props) {
   const query = useSearchParams();
   const [username, setUsername] = useState("");
   const [connectionDetails, setConnectionDetails] =
@@ -29,6 +30,7 @@ export default function Page({params: {room_name} }: Props) {
   const [selectedCharacter, setSelectedCharacter] =
     useState<CharacterName>("doux");
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
+  const isMobile = useMobile();
 
   useEffect(() => {
     setAudioContext(new AudioContext());
@@ -77,9 +79,13 @@ export default function Page({params: {room_name} }: Props) {
       <>
         <NavBar/>
         <Toaster/>
-        <div className={styles.container}>
-
-          <h2 className="text-4xl mb-2.5 font-bold break-all text-center px-2 max-w-2xl">{humanRoomName}</h2>
+        <div
+          style={{
+            flex: isMobile ? '1' : undefined
+          }}
+          className={styles.container}
+        >
+          <h2 className="text-4xl font-bold break-all text-center px-2 max-w-2xl">{humanRoomName}</h2>
 
           <div className="mb-2.5"></div>
 
@@ -144,7 +150,12 @@ export default function Page({params: {room_name} }: Props) {
           />
 
           <WebAudioContext.Provider value={audioContext}>
-            <div className="flex h-screen w-screen">
+            <div
+              className="flex w-screen"
+              style={{
+                height: isMobile ? `calc(100vh - 64px)` : 'h-screen',
+              }}
+            >
               <div
                 className={`flex flex-col w-full h-full`}
               >
