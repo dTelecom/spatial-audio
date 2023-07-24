@@ -151,7 +151,7 @@ export default function Page({params: {room_name}}: Props) {
 
           <WebAudioContext.Provider value={audioContext}>
             <div
-              className="flex w-screen"
+              className="flex h-screen w-screen"
               style={{
                 height: isMobile ? `calc(100vh - 64px)` : 'h-screen',
               }}
