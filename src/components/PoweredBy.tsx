@@ -18,7 +18,7 @@ export const PoweredBy = () => {
       target="_blank"
       className="flex sm:flex-row flex-col items-center justify-center"
       rel="noreferrer"
-      href="https://app.dtelecom.org"
+      href="https://dtelecom.org"
     >
       <div
         className="text-xs sm:mr-2 mr-0 flex items-center gap-2"
