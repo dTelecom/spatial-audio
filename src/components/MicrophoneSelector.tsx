@@ -8,10 +8,10 @@ export function MicrophoneSelector() {
     useMediaDeviceSelect({kind: "audioinput", room: roomContext});
 
   return (
-    <div className="px-2">
+    <div className="overflow-hidden w-full" style={{borderRadius: '5px'}}>
       <div
         className="flex items-center relative"
-        style={{background: '#212121', margin: '12px 0'}}
+        style={{background: '#212121'}}
       >
         <select
           id={'select'}

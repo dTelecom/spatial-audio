@@ -161,7 +161,7 @@ export function GameView() {
       />
 
       {mobile && (
-        <div className="absolute bottom-20 left-5 w-[120px] h-[120px] z-10">
+        <div className="absolute bottom-4 left-4 w-[120px] h-[120px] z-10">
           <DPad onInput={onMobileInput}/>
         </div>
       )}

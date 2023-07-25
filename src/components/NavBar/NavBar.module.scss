@@ -20,12 +20,6 @@
 
 	&.small {
 		height: 64px;
-
-		.link {
-			svg {
-				transform: scale(0.8);
-			}
-		}
 	}
 
 	.link {
@@ -33,8 +27,9 @@
 		display: flex;
 
 		& > svg {
+			width: 173px;
 			@media (max-width: 1023px) {
-				transform: scale(0.8);
+				width: 126px;
 			}
 		}
 	}

@@ -121,7 +121,7 @@ export default function Page({params: {room_name}}: Props) {
               className={styles.button}
               disabled={!username && username.length < 3}
             >
-              Join
+              Join Room
             </Button>
           </form>
         </div>
@@ -151,10 +151,7 @@ export default function Page({params: {room_name}}: Props) {
 
           <WebAudioContext.Provider value={audioContext}>
             <div
-              className="flex h-screen w-screen"
-              style={{
-                height: isMobile ? `calc(100vh - 64px)` : 'h-screen',
-              }}
+              className="flex h-screen w-screen lk-room-wrapper"
             >
               <div
                 className={`flex flex-col w-full h-full`}

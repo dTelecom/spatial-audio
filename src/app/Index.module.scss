@@ -11,6 +11,7 @@
 	.title {
 		text-align: center;
 		font-size: 42px;
+		line-height: 42px;
 		font-weight: 700;
 		margin-bottom: 8px;
 
@@ -19,10 +20,11 @@
 		}
 	}
 
-	.text {
+	.description {
 		font-size: 20px;
 
 		@media (max-width: 1023px) {
+			white-space: pre;
 			font-size: 16px;
 			text-align: center;
 		}

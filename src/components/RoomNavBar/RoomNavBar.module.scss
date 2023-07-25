@@ -23,20 +23,21 @@
 
 		.link {
 			svg {
-				transform: scale(0.8);
+				height: 40px;
+				width: 134px;
+
+				@media (max-width: 1023px) {
+					height: 32px;
+					width: 98px;
+				}
 			}
+
 		}
 	}
 
 	.link {
 		width: 100%;
 		display: flex;
-
-		& > svg {
-			@media (max-width: 1023px) {
-				transform: scale(0.8);
-			}
-		}
 	}
 
 	h2 {
@@ -48,6 +49,7 @@
 
 		@media (max-width: 1023px) {
 			font-size: 18px;
+			text-align: right;
 		}
 	}
 
@@ -56,6 +58,10 @@
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
+		gap: 16px;
+		@media (max-width: 600px) {
+			gap: 8px;
+		}
 
 		.counterContent {
 			display: flex;
@@ -66,6 +72,32 @@
 			border-radius: 5px;
 			padding: 6px 12px;
 			font-size: 14px;
+		}
+	}
+
+	.copyButton {
+		height: 32px;
+		border-radius: 5px;
+		display: flex;
+		gap: 8px;
+		padding: 8px 12px;
+
+		@media (max-width: 600px) {
+			background-color: #59E970 !important;
+			color: #252728 !important;
+			font-size: 0 !important;
+			padding: 8px;
+			gap: 0;
+			height: 32px;
+
+			& > svg {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
+		&.copied {
+			opacity: 0.8;
 		}
 	}
 }

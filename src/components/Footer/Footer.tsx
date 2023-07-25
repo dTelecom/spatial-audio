@@ -4,7 +4,7 @@ import DtelecomIcon from "../icons/dTelecom.svg";
 export const Footer = () => {
   return (
     <div className={styles.container}>
-      Powered by<DtelecomIcon />
+      Powered by<a href={'https://dtelecom.org/'} target={'_blank'} rel={'noreferrer'}><DtelecomIcon /></a>
     </div>
   );
 };
