@@ -1,8 +1,8 @@
-# Spatial Audio
+# Demo
 
-[![Sample Gif](https://user-images.githubusercontent.com/8453967/221318613-861215da-1d71-492e-979f-dc7f18cb5c7f.gif)]
+Try it for free at https://spatial.dmeet.org
 
-This is a demo of spatial audio. Users join a little 2D world, and hear other users' audio in stereo, based on their position and distance relative to you.
+A tiny 2D world you can join, navigate, and both see and hear other users, experiencing their audio in stereo according to their relative position and distance.
 
 ## Running locally
 
