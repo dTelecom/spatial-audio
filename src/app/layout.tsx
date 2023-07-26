@@ -14,14 +14,30 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head>
-        <title>Spatial</title>
+        <title>Web3 Spatial Room | dTelecom Cloud</title>
+        <meta
+          property="description"
+          content="dSpatial is a free, open source spatial meeting web app, built on the basis of the decentralized communication infrastructure of dTelecom Cloud."
+        />
+
+        <meta
+          property="og:site_name"
+          content="Web3 Meeting | dTelecom Cloud"
+        />
+
+        <meta
+          property="og:image:type"
+          content="image/png"
+        />
+
+        <meta
+          property="og:image"
+          content="/og.png"
+        />
+
         <meta
           content="width=device-width, initial-scale=1"
           name="viewport"
-        />
-        <meta
-          name="description"
-          content="Spatial"
         />
         <link
           rel="preconnect"
