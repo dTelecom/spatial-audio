@@ -6,7 +6,7 @@ import {
   LocalTrackPublication,
   RemoteTrackPublication,
   TrackPublication,
-} from "livekit-client";
+} from "@dtelecom/livekit-client";
 import React, {
   useCallback,
   useEffect,

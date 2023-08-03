@@ -1,4 +1,4 @@
-import {useMediaDeviceSelect, useRoomContext,} from "@livekit/components-react";
+import {useMediaDeviceSelect, useRoomContext,} from "@dtelecom/components-react";
 import ChevronIcon from './icons/chevron.svg';
 
 export function MicrophoneSelector() {

@@ -4,7 +4,7 @@ import {CharacterName} from "@/components/CharacterSelector";
 import {AnimationState} from "@/model/AnimationState";
 import {Player} from "@/model/Player";
 import {Vector2} from "@/model/Vector2";
-import {useRemoteParticipants} from "@livekit/components-react";
+import {useRemoteParticipants} from "@dtelecom/components-react";
 import {Dispatch, SetStateAction, useCallback, useMemo} from "react";
 import {useInterval} from "react-use";
 

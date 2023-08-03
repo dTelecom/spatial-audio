@@ -8,13 +8,13 @@ import {
   useLocalParticipant,
   useRemoteParticipants,
   useRoomContext,
-} from "@livekit/components-react";
+} from "@dtelecom/components-react";
 import {
   ConnectionState,
   DataPacket_Kind,
   RemoteParticipant,
   RoomEvent,
-} from "livekit-client";
+} from "@dtelecom/livekit-client";
 import React, {
   Dispatch,
   SetStateAction,

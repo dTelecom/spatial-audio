@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {useEffect, useMemo} from 'react';
-import type {Participant, TrackPublication} from 'livekit-client';
-import {Track} from 'livekit-client';
-import type {ParticipantClickEvent, TrackReferenceOrPlaceholder} from '@livekit/components-core';
-import {isParticipantSourcePinned, setupParticipantTile} from '@livekit/components-core';
+import type {Participant, TrackPublication} from '@dtelecom/livekit-client';
+import {Track} from '@dtelecom/livekit-client';
+import type {ParticipantClickEvent, TrackReferenceOrPlaceholder} from '@dtelecom/components-core';
+import {isParticipantSourcePinned, setupParticipantTile} from '@dtelecom/components-core';
 import {
   FocusToggle,
   ParticipantContext,
@@ -16,7 +16,7 @@ import {
   useMaybeTrackContext,
   useSpeakingParticipants,
   VideoTrack
-} from "@livekit/components-react";
+} from "@dtelecom/components-react";
 import {mergeProps} from "./utils";
 import {Vector2} from "@/model/Vector2";
 import {TrackPosition} from "@/controller/SpatialAudioController";
