@@ -3,7 +3,7 @@
 import {WebAudioContext} from "@/providers/audio/webAudio";
 import {BottomBar} from "@/components/BottomBar";
 import {ConnectionDetails, ConnectionDetailsBody,} from "@/pages/api/connection_details";
-import {LiveKitRoom} from "@livekit/components-react";
+import {LiveKitRoom} from "@dtelecom/components-react";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {toast, Toaster} from "react-hot-toast";
 import {CharacterName, CharacterSelector,} from "@/components/CharacterSelector";

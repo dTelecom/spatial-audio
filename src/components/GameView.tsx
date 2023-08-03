@@ -7,7 +7,7 @@ import {
   useParticipantInfo,
   useSpeakingParticipants,
   useTracks,
-} from "@livekit/components-react";
+} from "@dtelecom/components-react";
 import {Container} from "@pixi/react";
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import useResizeObserver from "use-resize-observer";
@@ -16,7 +16,7 @@ import {InputController} from "@/controller/InputController";
 import {useGameState} from "@/model/GameState";
 import {MyCharacterController} from "@/controller/MyCharacterController";
 import {MyPlayerSpawnController} from "@/controller/MyPlayerSpawnController";
-import {ConnectionState, RoomEvent, Track} from "livekit-client";
+import {ConnectionState, RoomEvent, Track} from "@dtelecom/livekit-client";
 import {SpatialAudioController} from "@/controller/SpatialAudioController";
 import {RemotePlayersController} from "@/controller/RemotePlayersController";
 import {WorldBoundaryController} from "@/controller/WorldBoundaryController";

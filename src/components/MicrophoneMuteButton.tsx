@@ -1,5 +1,5 @@
-import { TrackToggle } from "@livekit/components-react";
-import { Track } from "livekit-client";
+import { TrackToggle } from "@dtelecom/components-react";
+import { Track } from "@dtelecom/livekit-client";
 
 export function MicrophoneMuteButton() {
   return (
