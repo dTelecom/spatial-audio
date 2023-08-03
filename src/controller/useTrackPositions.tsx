@@ -1,6 +1,6 @@
 import { Player } from "@/model/Player";
 import { Vector2 } from "@/model/Vector2";
-import { TrackReference } from "@livekit/components-core";
+import { TrackReference } from "@dtelecom/components-core";
 import { useTracks } from "@dtelecom/components-react";
 import {
   Participant,
