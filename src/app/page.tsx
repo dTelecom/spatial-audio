@@ -9,10 +9,8 @@ import KeyIcon from "@/components/icons/key.svg";
 import {Button} from "@/components/Button";
 import styles from './Index.module.scss';
 import {Footer} from "@/components/Footer/Footer";
-import {useMobile} from "@/util/useMobile";
 
 export default function Home() {
-  const isMobile = useMobile();
   const router = useRouter();
   const [roomName, setRoomName] = useState("");
 
