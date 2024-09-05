@@ -24,7 +24,7 @@
     "daisyui": "^2.49.0",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.5",
-    "@dtelecom/livekit-client": "^1.12.6",
+    "@dtelecom/livekit-client": "^1.12.13",
     "next": "13.1.5",
     "pixi.js": "^7.1.1",
     "react": "18.2.0",
