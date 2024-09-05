@@ -993,10 +993,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@dtelecom/components-core@0.6.15", "@dtelecom/components-core@^0.6.15":
-  version "0.6.15"
-  resolved "https://registry.yarnpkg.com/@dtelecom/components-core/-/components-core-0.6.15.tgz#974ae46a8a1b51d499674c8b243a3b78fb45275b"
-  integrity sha512-TaxbFiZs/Wa4tx+8zUeUf3CEGG3C5rVS/cRO27uFdUweGEe6BD+Zun4inFhztq97Jz/AEQglNLBdcLQSIQUNJw==
+"@dtelecom/components-core@0.6.17", "@dtelecom/components-core@^0.6.17":
+  version "0.6.17"
+  resolved "https://registry.yarnpkg.com/@dtelecom/components-core/-/components-core-0.6.17.tgz#07381a49721093f8a52d181cf8fa4f453232875c"
+  integrity sha512-lMjvHMCbenuonhJy6YppvJBG/9afM6s8xxNeWfRutEFxBzAckZuT/um74EW9MOscZp8csy955qwoHAU8+AU58A==
   dependencies:
     "@floating-ui/dom" "^1.1.0"
     email-regex "^5.0.0"
@@ -1004,19 +1004,20 @@
     loglevel "^1.8.1"
     rxjs "^7.8.0"
 
-"@dtelecom/components-react@^1.0.17":
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/@dtelecom/components-react/-/components-react-1.0.17.tgz#9b3d78da04a2e75f64b1d949cdc36f65a42a4173"
-  integrity sha512-ZLTyroqBrcRKJkvkVGSr78xFBOj+1qw5Jq0zNIsXtmu25Zx1b2J1rpbQAJUl3wJXDRdDoB2kcy62mxZK7Jub9g==
+"@dtelecom/components-react@^1.0.30":
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/@dtelecom/components-react/-/components-react-1.0.30.tgz#3c676f357441142a9e3fcd2c52423f489b12fbbb"
+  integrity sha512-3qcMCQwI562xsX6DQKcY0lxq+QHioGJ9EAIrS3ioDxbs+5i5rqJMwhGf5JtPnv113KTUVr6Fc/6YK5AztP1bgA==
   dependencies:
-    "@dtelecom/components-core" "0.6.15"
+    "@dtelecom/components-core" "0.6.17"
     "@react-hook/latest" "^1.0.3"
     clsx "^1.2.1"
+    country-flags-svg "^2.0.0-beta.1"
 
-"@dtelecom/livekit-client@^1.12.6":
-  version "1.12.6"
-  resolved "https://registry.yarnpkg.com/@dtelecom/livekit-client/-/livekit-client-1.12.6.tgz#f419b4dd90b58ff27b667bd841cf3033fb162575"
-  integrity sha512-mqI7wWzpSRBUWppxz+/VMqPG3dFPyKnbpBqfPEJmJTkNMBHraG1HoD1Z0nMtzQSuRaYKbaJ5C14VzxvxPQb4hQ==
+"@dtelecom/livekit-client@^1.12.13":
+  version "1.12.13"
+  resolved "https://registry.yarnpkg.com/@dtelecom/livekit-client/-/livekit-client-1.12.13.tgz#ff88f2cd4de084ea41fac9b784d63ecc5332d366"
+  integrity sha512-USPstEW48KEarpWzmc/CZO1mL6LDesihBcIAPihnB+EWo2fqEarb1UOkJY/Z0fApWW6ZeE8Bw6rusKejTreN2Q==
   dependencies:
     eventemitter3 "^5.0.1"
     loglevel "^1.8.0"
@@ -2804,6 +2805,11 @@ cosmiconfig@^7.0.1:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+country-flags-svg@^2.0.0-beta.1:
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/country-flags-svg/-/country-flags-svg-2.0.0-beta.1.tgz#c836d2a0702a9959a1d429c9609bcd990e48e5a7"
+  integrity sha512-nOJOoClV+Jy6sftBAJ7R1j+0zMu45T/ljZWP4lCCwcImRn5/55LapjNU+NM/gFiEGdKTEOiiyDpGn5yGaBHgsg==
 
 crc-32@^1.2.0:
   version "1.2.2"
