@@ -1,6 +1,30 @@
 import "./globals.scss";
 import React from "react";
 import DynamicAppWrapper from '@/components/DynamicAppWrapper';
+import { Metadata } from 'next';
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Web3 Spatial Room | dTelecom Cloud',
+  description: 'dSpatial is a free, open source spatial meeting web app, built on the basis of the decentralized communication infrastructure of dTelecom Cloud.',
+  openGraph: {
+    title: 'Web3 Spatial Room | dTelecom Cloud',
+    description: 'dSpatial is a free, open source spatial meeting web app, built on the basis of the decentralized communication infrastructure of dTelecom Cloud.',
+    siteName: 'Web3 Meeting | dTelecom Cloud',
+    images: [ "/og.png" ],
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  }
+};
 
 export default function RootLayout({
   children,
@@ -12,51 +36,7 @@ export default function RootLayout({
       lang="en"
       data-theme="cupcake"
     >
-    <head>
-      <title>Web3 Spatial Room | dTelecom Cloud</title>
-      <meta
-        property="description"
-        content="dSpatial is a free, open source spatial meeting web app, built on the basis of the decentralized communication infrastructure of dTelecom Cloud."
-      />
-
-      <meta
-        property="og:site_name"
-        content="Web3 Meeting | dTelecom Cloud"
-      />
-
-      <meta
-        property="og:image:type"
-        content="image/png"
-      />
-
-      <meta
-        property="og:image"
-        content="/og.png"
-      />
-
-      <meta
-        content="width=device-width, initial-scale=1"
-        name="viewport"
-      />
-      <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-      />
-      <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossOrigin={""}
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        rel="icon"
-        href="/favicon.png"
-      />
-    </head>
-    <body>
+    <body className={inter.className}>
     <DynamicAppWrapper>
       {children}
     </DynamicAppWrapper>

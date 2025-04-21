@@ -18,8 +18,11 @@ main {
 	height: 100%;
 	margin: 0;
 	background: #000000;
-	font-family: Inter, serif;
 	color: #FFFFFF;
+}
+
+body {
+	font-family: var(--font-inter), serif;
 }
 
 main {

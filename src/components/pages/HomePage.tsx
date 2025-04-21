@@ -32,7 +32,7 @@ export default function Home() {
       return;
     }
     await setCookie("roomName", roomName, window.location.origin);
-    router.push(`/room/${roomName}`);
+    router.push(`/createRoom?roomName=${encodeURIComponent(roomName)}`);
   }, [roomName, router]);
 
   return (
