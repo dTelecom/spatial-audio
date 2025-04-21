@@ -9,20 +9,8 @@ import {
   useRemoteParticipants,
   useRoomContext,
 } from "@dtelecom/components-react";
-import {
-  ConnectionState,
-  DataPacket_Kind,
-  RemoteParticipant,
-  RoomEvent,
-} from "@dtelecom/livekit-client";
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import { ConnectionState, DataPacket_Kind, RemoteParticipant, RoomEvent, } from "@dtelecom/livekit-client";
+import React, { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, } from "react";
 import { useInterval } from "react-use";
 
 type Props = {

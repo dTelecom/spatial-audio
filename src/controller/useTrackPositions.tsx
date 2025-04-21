@@ -1,14 +1,8 @@
 import { Player } from "@/model/Player";
-import { Vector2 } from "@/model/Vector2";
 import { TrackReference } from "@dtelecom/components-core";
 import { useTracks } from "@dtelecom/components-react";
-import {
-  Participant,
-  RoomEvent,
-  Track,
-  TrackPublication,
-} from "@dtelecom/livekit-client";
-import { useEffect, useMemo, useState } from "react";
+import { RoomEvent, Track, } from "@dtelecom/livekit-client";
+import { useMemo, useState } from "react";
 import { TrackPosition } from "./SpatialAudioController";
 
 type Props = {
