@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://spatial.dmeet.org"),
   title: 'Web3 Spatial Room | dTelecom Cloud',
   description: 'dSpatial is a free, open source spatial meeting web app, built on the basis of the decentralized communication infrastructure of dTelecom Cloud.',
   openGraph: {
