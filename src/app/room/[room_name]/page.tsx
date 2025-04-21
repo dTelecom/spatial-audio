@@ -1,28 +1,26 @@
 "use client";
 
-import {WebAudioContext} from "@/providers/audio/webAudio";
-import {BottomBar} from "@/components/BottomBar";
-import {ConnectionDetails, ConnectionDetailsBody,} from "@/pages/api/connection_details";
-import {LiveKitRoom} from "@dtelecom/components-react";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {toast, Toaster} from "react-hot-toast";
-import {CharacterName, CharacterSelector,} from "@/components/CharacterSelector";
-import {GameView} from "@/components/GameView";
-import {Input} from "@/components/Input/Input";
+import { WebAudioContext } from "@/providers/audio/webAudio";
+import { BottomBar } from "@/components/BottomBar";
+import { ConnectionDetails, ConnectionDetailsBody, } from "@/app/api/connection_details/route";
+import { LiveKitRoom } from "@dtelecom/components-react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
+import { CharacterName, CharacterSelector, } from "@/components/CharacterSelector";
+import { GameView } from "@/components/GameView";
+import { Input } from "@/components/Input/Input";
 import UserIcon from "@/components/icons/user.svg";
-import {Button} from "@/components/Button";
+import { Button } from "@/components/Button";
 import styles from "./Page.module.scss";
-import {NavBar} from "@/components/NavBar/NavBar";
-import {Footer} from "@/components/Footer/Footer";
-import {RoomNavBar} from "@/components/RoomNavBar/RoomNavBar";
-import {useSearchParams} from "next/navigation";
-import {useMobile} from "@/util/useMobile";
+import { NavBar } from "@/components/NavBar/NavBar";
+import { Footer } from "@/components/Footer/Footer";
+import { RoomNavBar } from "@/components/RoomNavBar/RoomNavBar";
+import { useParams, useSearchParams } from "next/navigation";
+import { useMobile } from "@/util/useMobile";
+import { getCookie, setCookie } from '@/app/actions';
 
-type Props = {
-  params: { room_name: string };
-};
-
-export default function Page({params: {room_name}}: Props) {
+export default function Page() {
+  const { room_name } = useParams();
   const query = useSearchParams();
   const [username, setUsername] = useState("");
   const [connectionDetails, setConnectionDetails] =
@@ -34,6 +32,9 @@ export default function Page({params: {room_name}}: Props) {
 
   useEffect(() => {
     setAudioContext(new AudioContext());
+    getCookie("username").then((cookie) => {
+      setUsername(cookie || "");
+    });
     return () => {
       setAudioContext((prev) => {
         prev?.close();
@@ -43,27 +44,28 @@ export default function Page({params: {room_name}}: Props) {
   }, []);
 
   const humanRoomName = useMemo(() => {
-    return decodeURI(room_name);
+    return decodeURI(room_name as string);
   }, [room_name]);
 
   const requestConnectionDetails = useCallback(
     async (username: string) => {
       const body: ConnectionDetailsBody = {
-        room_name,
+        room_name: room_name as string,
         username,
         character: selectedCharacter,
         randomIp: query.get('randomIp') || undefined,
       };
       const response = await fetch("/api/connection_details", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
       if (response.status === 200) {
+        await setCookie('username', username || '', window.location.origin);
         return response.json();
       }
 
-      const {error} = await response.json();
+      const { error } = await response.json();
       throw error;
     },
     [room_name, selectedCharacter]
@@ -77,8 +79,8 @@ export default function Page({params: {room_name}}: Props) {
   if (connectionDetails === null) {
     return (
       <>
-        <NavBar/>
-        <Toaster/>
+        <NavBar />
+        <Toaster />
         <div
           style={{
             flex: isMobile ? '1' : undefined
@@ -112,7 +114,7 @@ export default function Page({params: {room_name}}: Props) {
               placeholder={"Enter your name"}
               value={username}
               setValue={setUsername}
-              startIcon={<UserIcon/>}
+              startIcon={<UserIcon />}
             />
             <Button
               type={"submit"}
@@ -126,49 +128,47 @@ export default function Page({params: {room_name}}: Props) {
           </form>
         </div>
 
-        <Footer/>
+        <Footer />
       </>
     );
   }
 
   // Show the room UI
   return (
-    <>
-      <div className={styles.container}>
-        <LiveKitRoom
-          token={connectionDetails.token}
-          serverUrl={connectionDetails.ws_url}
-          connect={true}
-          connectOptions={{autoSubscribe: false}}
-          options={{expWebAudioMix: {audioContext}, dynacast: false}}
-          video={false}
-          audio={true}
-        >
-          <RoomNavBar
-            title={room_name}
-            small
-          />
+    <div className={styles.container}>
+      <LiveKitRoom
+        token={connectionDetails.token}
+        serverUrl={connectionDetails.ws_url}
+        connect={true}
+        connectOptions={{ autoSubscribe: false }}
+        options={{ expWebAudioMix: { audioContext }, dynacast: false }}
+        video={false}
+        audio={true}
+      >
+        <RoomNavBar
+          title={room_name as string}
+          small
+        />
 
-          <WebAudioContext.Provider value={audioContext}>
+        <WebAudioContext.Provider value={audioContext}>
+          <div
+            className="flex h-screen w-screen lk-room-wrapper"
+          >
             <div
-              className="flex h-screen w-screen lk-room-wrapper"
+              className={`flex flex-col w-full h-full`}
             >
-              <div
-                className={`flex flex-col w-full h-full`}
-              >
-                <div className="grow flex">
-                  <div className="grow">
-                    <GameView/>
-                  </div>
-                </div>
-                <div className="bg-neutral">
-                  <BottomBar/>
+              <div className="grow flex">
+                <div className="grow">
+                  <GameView />
                 </div>
               </div>
+              <div className="bg-neutral">
+                <BottomBar />
+              </div>
             </div>
-          </WebAudioContext.Provider>
-        </LiveKitRoom>
-      </div>
-    </>
+          </div>
+        </WebAudioContext.Provider>
+      </LiveKitRoom>
+    </div>
   );
 }

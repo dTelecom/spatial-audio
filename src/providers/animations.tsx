@@ -1,7 +1,6 @@
 "use-client";
 
 import { CharacterName } from "@/components/CharacterSelector";
-import { useApp } from "@pixi/react";
 import {
   BaseTexture,
   Cache,

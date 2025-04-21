@@ -2,18 +2,8 @@
 
 import { Vector2 } from "@/model/Vector2";
 import { useMobile } from "@/util/useMobile";
-import {
-  LocalTrackPublication,
-  RemoteTrackPublication,
-  TrackPublication,
-} from "@dtelecom/livekit-client";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { LocalTrackPublication, RemoteTrackPublication, TrackPublication, } from "@dtelecom/livekit-client";
+import React, { useCallback, useEffect, useMemo, useRef, useState, } from "react";
 import { useWebAudioContext } from "../providers/audio/webAudio";
 
 export type TrackPosition = {
@@ -222,7 +212,10 @@ function PublicationRenderer({
 
   return (
     <>
-      <audio muted={true} ref={audioEl} />
+      <audio
+        muted={true}
+        ref={audioEl}
+      />
     </>
   );
 }

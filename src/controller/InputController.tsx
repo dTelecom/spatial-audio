@@ -1,12 +1,6 @@
 import { Inputs } from "@/model/Inputs";
 import { useMobile } from "@/util/useMobile";
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, } from "react";
 
 type Props = {
   mobileInputs?: Inputs;
