@@ -9,7 +9,7 @@ import { formatUserId } from "@/lib/dtel-auth/helpers";
 const { AccessToken } = require("@dtelecom/server-sdk-js");
 
 export type ConnectionDetailsBody = {
-  room_name: string;
+  roomName: string;
   username: string;
   character: CharacterName;
   randomIp?: string;
@@ -17,7 +17,7 @@ export type ConnectionDetailsBody = {
 
 export type ConnectionDetails = {
   token: string;
-  ws_url: string;
+  wsUrl: string;
 };
 
 type ErrorResponse = {
@@ -30,7 +30,7 @@ export async function POST(
   const body = await req.json();
   const {
     username,
-    room_name: room,
+    roomName,
     character,
     randomIp,
   } = body as ConnectionDetailsBody;
@@ -44,7 +44,7 @@ export async function POST(
 
   if (!username) return NextResponse.json({ error: "Missing username" }, { status: 400 });
   if (!character) return NextResponse.json({ error: "Missing character" }, { status: 400 });
-  if (!room) return NextResponse.json({ error: "Missing room_name" }, { status: 400 });
+  if (!roomName) return NextResponse.json({ error: "Missing roomName" }, { status: 400 });
 
   const userId = await getUserIdFromHeaders(req);
   const formattedUserId = formatUserId(userId);
@@ -61,20 +61,21 @@ export async function POST(
 
   const wsUrl = await token.getWsUrl(clientIp);
 
-
   if (!wsUrl) {
     return NextResponse.json({ error: "Server misconfigured, ws url" }, { status: 500 });
   }
 
+  const slug = generateUUID()
+
   token.addGrant({
-    room: room,
+    room: slug,
     roomJoin: true,
     canPublish: true,
     canPublishData: true,
   });
-  token.metadata = JSON.stringify({ character });
+  token.metadata = JSON.stringify({ character, admin: true });
   token.webHookURL = userId && process.env.NEXT_PUBLIC_POINTS_BACKEND_URL
     ? `https://${process.env.NEXT_PUBLIC_POINTS_BACKEND_URL}/api/webhook`
     : undefined;
-  return NextResponse.json({ token: token.toJwt(), ws_url: wsUrl }, { status: 200 });
+  return NextResponse.json({ token: token.toJwt(), wsUrl: wsUrl, slug }, { status: 200 });
 }

@@ -15,9 +15,10 @@ interface Props extends React.PropsWithChildren {
   title?: string;
   small?: boolean;
   showCounter?: boolean;
+  slug?: string;
 }
 
-export function RoomNavBar({title, small}: Props) {
+export function RoomNavBar({title, small, slug}: Props) {
   const isMobile = useMobile();
   const tracks = useTracks(
     [
@@ -28,7 +29,7 @@ export function RoomNavBar({title, small}: Props) {
   );
   const [copied, setCopied] = useState(false);
   const copy = async () => {
-    const url = `${window.location.origin}/room/${title}`;
+    const url = `${window.location.origin}/join/${slug}?roomName=${encodeURIComponent(title || "")}`;
     await navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
