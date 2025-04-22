@@ -5,15 +5,17 @@ import { Metadata } from 'next';
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+const title = "dMeet | Spatial Meeting App"
+const description = "Free, open-source, 2D world where you can interact, see, and hear others with spatial stereo audio. Use the app, Invite friends, Earn points. Powered by dTelecom."
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://spatial.dmeet.org"),
-  title: 'Web3 Spatial Room | dTelecom Cloud',
-  description: 'dSpatial is a free, open source spatial meeting web app, built on the basis of the decentralized communication infrastructure of dTelecom Cloud.',
+  title: title,
+  description: description,
   openGraph: {
-    title: 'Web3 Spatial Room | dTelecom Cloud',
-    description: 'dSpatial is a free, open source spatial meeting web app, built on the basis of the decentralized communication infrastructure of dTelecom Cloud.',
-    siteName: 'Web3 Meeting | dTelecom Cloud',
+    title: title,
+    description: description,
+    siteName: title,
     images: [ "/og.png" ],
   },
   viewport: {
