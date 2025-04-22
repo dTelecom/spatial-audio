@@ -51,9 +51,10 @@ export default function Home() {
       </NavBar>
 
       <div className={styles.container}>
-        <h1 className={styles.title}>Create a Spatial Room</h1>
+        <h1 className={styles.title}>Create a Spatial Meeting<br/>and Get Points</h1>
 
-        <p className={styles.description}>{'Open source spatial meeting app built\non '}<a
+        <p className={styles.description}>{'Free, open-source, 2D world where you can\ninteract, see, and hear others with spatial stereo audio.'}
+          <br/><span>Powered by </span><a
           href={'https://video.dtelecom.org/'}
           target={'_blank'}
           rel={'noreferrer'}
