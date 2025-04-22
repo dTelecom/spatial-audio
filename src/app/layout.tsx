@@ -7,7 +7,7 @@ import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 const title = "dMeet | Spatial Meeting App"
-const description = "Free, open-source, 2D world where you can interact, see, and hear others with spatial stereo audio. Use the app, Invite friends, Earn points. Powered by dTelecom."
+const description = "Free, open-source, 2D world where you can interact, see, and hear others with spatial stereo audio. Use the app, invite friends, and earn points. Powered by dTelecom."
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://spatial.dmeet.org"),
