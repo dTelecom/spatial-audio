@@ -1,3 +1,4 @@
+import "@dtelecom/components-styles";
 import "./globals.scss";
 import React from "react";
 import DynamicAppWrapper from '@/components/DynamicAppWrapper';

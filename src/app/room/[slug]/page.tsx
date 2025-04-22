@@ -36,6 +36,7 @@ const useRoomParams = () => {
   return { ...roomState };
 };
 export default function Page() {
+  const router = useRouter();
   const { slug } = useParams();
   const { token, wsUrl, roomName } = useRoomParams();
 
@@ -66,6 +67,11 @@ export default function Page() {
         options={{ expWebAudioMix: { audioContext }, dynacast: false }}
         video={false}
         audio={true}
+        activityModalEnabled
+        onDisconnected={async () => {
+          await audioContext?.close();
+          router.push(`/`);
+        }}
       >
         <RoomNavBar
           title={roomName}
