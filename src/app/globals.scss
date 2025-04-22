@@ -1,11 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  :root {
-    --lk-control-active-hover-bg: #2E3031;
-  }
+:root {
+  --lk-control-active-hover-bg: #2E3031;
 }
 
 * {
@@ -41,171 +38,171 @@ main {
   justify-items: center;
   padding-top: 96px;
   padding-bottom: 45px;
-}
 
-button {
-  outline: none;
-  box-shadow: none !important;
-}
-
-.bg-green {
-  background-color: #59E970;
-  color: #252728;
-}
-
-.lk-room-container {
-  flex: 1;
-  position: initial !important;
-}
-
-.lk-button[data-lk-source="microphone"], .lk-button[data-lk-source="camera"] {
-  height: 32px;
-  width: 32px;
-  background: #59E970;
-  display: flex;
-  min-height: 0;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  color: black;
-
-  &[data-lk-enabled="false"] {
-    background: #2E3031;
-    color: #FFFFFF;
-  }
-}
-
-.select {
-	overflow: hidden;
-	text-overflow: ellipsis;
-  font-size: 14px;
-  height: 32px;
-  border-radius: 5px;
-  background-color: transparent;
-  color: #FFFFFF;
-  margin: 0;
-  line-height: 140%;
-  min-height: 0;
-  background-image: none;
-  padding-left: 10px;
-  padding-right: 32px;
-  width: 200px;
-
-  @media (max-width: 600px) {
-    width: 100px;
-  }
-}
-
-.lk-participant-media-video {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  object-fit: cover;
-  position: relative;
-  z-index: 2;
-
-  @media (max-width: 1023px) {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-.lk-participant-tile {
-  width: 96px;
-  height: 96px;
-  border: 4px solid transparent;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
-  box-sizing: content-box;
-  flex-shrink: 0;
-
-  &[data-lk-video-muted="true"] > .lk-participant-media-video {
-    opacity: 0;
+  button {
+    outline: none;
+    box-shadow: none !important;
   }
 
-  @media (max-width: 1023px) {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+  .bg-green {
+    background-color: #59E970;
+    color: #252728;
   }
-}
 
-.lk-participant-metadata {
-  position: absolute;
-  bottom: -42px;
-  left: 0;
-  margin-top: 12px;
+  .lk-room-container {
+    flex: 1;
+    position: initial !important;
+  }
 
-  .lk-participant-metadata-item {
+  .lk-button[data-lk-source="microphone"], .lk-button[data-lk-source="camera"] {
+    height: 32px;
+    width: 32px;
+    background: #59E970;
     display: flex;
+    min-height: 0;
+    border-radius: 5px;
+    align-items: center;
     justify-content: center;
+    padding: 0;
+    color: black;
 
-    .lk-participant-name {
-      width: 96px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-      white-space: nowrap;
+    &[data-lk-enabled="false"] {
+      background: #2E3031;
+      color: #FFFFFF;
+    }
+  }
 
-      @media (max-width: 1023px) {
-        width: 80px;
+  .select {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    height: 32px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #FFFFFF;
+    margin: 0;
+    line-height: 140%;
+    min-height: 0;
+    background-image: none;
+    padding-left: 10px;
+    padding-right: 32px;
+    width: 200px;
+
+    @media (max-width: 600px) {
+      width: 100px;
+    }
+  }
+
+  .lk-participant-media-video {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+
+    @media (max-width: 1023px) {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  .lk-participant-tile {
+    width: 96px;
+    height: 96px;
+    border: 4px solid transparent;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    box-sizing: content-box;
+    flex-shrink: 0;
+
+    &[data-lk-video-muted="true"] > .lk-participant-media-video {
+      opacity: 0;
+    }
+
+    @media (max-width: 1023px) {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+  }
+
+  .lk-participant-metadata {
+    position: absolute;
+    bottom: -42px;
+    left: 0;
+    margin-top: 12px;
+
+    .lk-participant-metadata-item {
+      display: flex;
+      justify-content: center;
+
+      .lk-participant-name {
+        width: 96px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        white-space: nowrap;
+
+        @media (max-width: 1023px) {
+          width: 80px;
+        }
       }
     }
   }
-}
 
-.lk-participant-placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.lk-participant-placeholder > svg {
-  width: 96px;
-  height: 96px;
-  transform: scale(0.6);
-
-  @media (max-width: 1023px) {
-    width: 80px;
-    height: 80px;
-    transform: scale(0.5);
+  .lk-participant-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
-}
 
-.lk-tracks-row {
-  display: flex;
-  z-index: 1;
-  position: absolute;
-  top: 24px;
-  gap: 8px;
-  overflow-x: auto;
-  overflow-y: visible;
-  height: 146px;
-}
+  .lk-participant-placeholder > svg {
+    width: 96px;
+    height: 96px;
+    transform: scale(0.6);
 
-.lk-tracks-row::-webkit-scrollbar {
-  display: none;
-}
+    @media (max-width: 1023px) {
+      width: 80px;
+      height: 80px;
+      transform: scale(0.5);
+    }
+  }
 
-.lk-room-wrapper {
-  padding-top: 64px;
-  height: 100vh;
-}
+  .lk-tracks-row {
+    display: flex;
+    z-index: 1;
+    position: absolute;
+    top: 24px;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: visible;
+    height: 146px;
+  }
 
-@supports (-webkit-touch-callout: none) {
-  .lk-room-wrapper {
-    height: -webkit-fill-available;
+  .lk-tracks-row::-webkit-scrollbar {
+    display: none;
   }
 
   .lk-room-wrapper {
-    height: 100%;
+    padding-top: 64px;
+    height: 100vh;
   }
-}
 
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-indent: 1px;
-  text-overflow: '';
+  @supports (-webkit-touch-callout: none) {
+    .lk-room-wrapper {
+      height: -webkit-fill-available;
+    }
+
+    .lk-room-wrapper {
+      height: 100%;
+    }
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+  }
 }
