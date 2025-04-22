@@ -53,8 +53,7 @@ export default function Home() {
       <div className={styles.container}>
         <h1 className={styles.title}>Create a Spatial Meeting<br/>and Get Points</h1>
 
-        <p className={styles.description}>{'Free, open-source, 2D world where you can\ninteract, see, and hear others with spatial stereo audio.'}
-          <br/><span>Powered by </span><a
+        <p className={styles.description}>{'Free, open-source, 2D world where you can\ninteract, see, and hear others with spatial\nstereo audio. Powered by '}<a
           href={'https://video.dtelecom.org/'}
           target={'_blank'}
           rel={'noreferrer'}
