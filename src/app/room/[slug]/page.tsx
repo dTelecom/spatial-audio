@@ -40,6 +40,10 @@ export default function Page() {
   const { slug } = useParams();
   const { token, wsUrl, roomName } = useRoomParams();
 
+  useEffect(() => {
+    window.history.replaceState(null, '', window.location.pathname);
+  }, [router, slug]);
+
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
 
   useEffect(() => {
@@ -81,7 +85,10 @@ export default function Page() {
 
         <WebAudioContext.Provider value={audioContext}>
           <div
-            className="flex h-screen w-screen lk-room-wrapper"
+            className="flex h-screen lk-room-wrapper"
+            style={{
+              width: "100%",
+            }}
           >
             <div
               className={`flex flex-col w-full h-full`}

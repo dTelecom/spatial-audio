@@ -19,7 +19,7 @@ export function MicrophoneSelector() {
             setActiveMediaDevice(e.currentTarget.value);
           }}
           value={activeDeviceId}
-          className="select select-sm w-full sm:max-w-[200px] max-w-[100px] m-2 select-none"
+          className="select select-sm w-full m-2 select-none"
           style={{zIndex: 2}}
         >
           <option
