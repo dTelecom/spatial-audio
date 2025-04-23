@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./Leaderboard.module.scss";
 import { ChainIcon, CloseIcon, InfoIcon, LeaderboardIcon, PlusIcon, TickIcon } from "@/assets";
@@ -59,7 +59,7 @@ export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
         setOpen(false);
       }
       setTimeout(() => {
-        void getPoints()
+        void getPoints();
       }, 5000);
     }
   };
@@ -262,9 +262,9 @@ export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
         </div>
       )}
     </>
-  )
+  );
 
-  const modal = createPortal(modalContent , document.body, 'leaderboard-modal');
+  const modal = createPortal(modalContent, document.body, 'leaderboard-modal');
 
   if (!initialRequestReturnedData && process.env.NODE_ENV === "production") {
     return null;
