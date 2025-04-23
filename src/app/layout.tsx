@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import "@dtelecom/components-styles/components/index.css";
 import "./globals.scss";
 import React from "react";

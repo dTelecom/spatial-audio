@@ -15,6 +15,7 @@
     "@dtelecom/server-sdk-js": "^2.0.6",
     "@pixi/react": "^7.1.2",
     "@pixi/tilemap": "^3.2.2",
+    "@pixi/unsafe-eval": "^7.4.3",
     "@privy-io/react-auth": "2.8.0",
     "@privy-io/server-auth": "^1.20.2",
     "@types/node": "18.11.18",
@@ -49,7 +50,7 @@
     "@svgr/webpack": "^8.0.1",
     "autoprefixer": "^10.4.13",
     "eslint": "^9",
-    "eslint-config-next": "15.3.0",
+    "eslint-config-next": "13.5.11",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4",
     "typescript": "^5"
