@@ -1,5 +1,6 @@
 import { Vector2 } from "@/model/Vector2";
 import { Graphics } from "pixi.js";
+import '@pixi/unsafe-eval';
 import { Graphics as GraphicsComponent } from "@pixi/react";
 import { useCallback } from "react";
 
