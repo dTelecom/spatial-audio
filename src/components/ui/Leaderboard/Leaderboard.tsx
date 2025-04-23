@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./Leaderboard.module.scss";
 import { ChainIcon, CloseIcon, InfoIcon, LeaderboardIcon, PlusIcon, TickIcon } from "@/assets";
@@ -8,6 +8,7 @@ import { getInviteCode, INVITE_CODE_QUERY_KEY } from "@/lib/hooks/useInviteCode"
 import { CopyIcon } from "lucide-react";
 import { ADMIN_POINTS_MULTIPLIER, BASE_REWARDS_PER_MINUTE, REFERRAL_REWARD_PERCENTAGE } from "@/lib/constants";
 import { getAccessToken } from "@privy-io/react-auth";
+import { createPortal } from 'react-dom';
 
 interface LeaderboardRecord {
   position: number;
@@ -86,20 +87,8 @@ export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if (!initialRequestReturnedData) {
-    return null;
-  }
-
-  return (
+  const modalContent: any = (
     <>
-      <button
-        style={buttonStyle}
-        onClick={onOpen}
-        className={styles.leaderBoardButton}
-      >
-        <LeaderboardIcon />
-      </button>
-
       {open && !instructionOpen && (
         <div
           onClick={(e) => {
@@ -272,6 +261,26 @@ export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
           </div>
         </div>
       )}
+    </>
+  )
+
+  const modal = createPortal(modalContent , document.body, 'leaderboard-modal');
+
+  if (!initialRequestReturnedData && process.env.NODE_ENV === "production") {
+    return null;
+  }
+
+  return (
+    <>
+      <button
+        style={buttonStyle}
+        onClick={onOpen}
+        className={styles.leaderBoardButton}
+      >
+        <LeaderboardIcon />
+      </button>
+
+      {modal}
     </>
   );
 };
