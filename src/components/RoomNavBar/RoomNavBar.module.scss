@@ -82,6 +82,10 @@
 		gap: 8px;
 		padding: 8px 12px;
 
+		&:hover {
+			opacity: 0.8;
+		}
+
 		@media (max-width: 600px) {
 			background-color: #59E970 !important;
 			color: #252728 !important;
