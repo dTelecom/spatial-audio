@@ -8,28 +8,28 @@ import { Input } from '@/components/Input/Input';
 import UserIcon from '@/components/icons/user.svg';
 import { Button } from '@/components/Button';
 import { Footer } from '@/components/Footer/Footer';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { ConnectionDetails, ConnectionDetailsBody } from '@/app/api/createRoom/route';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ConnectionDetailsBody } from '@/app/api/createRoom/route';
 import { getCookie, setCookie } from '@/app/actions';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useMobile } from '@/util/useMobile';
-import { push } from 'mnemonist/heap';
+import { Loader } from '@dtelecom/components-react';
 
 export default function Page() {
   const query = useSearchParams();
   const router = useRouter();
   const roomName = query.get('roomName') || "";
-  const [username, setUsername] = useState("");  const [selectedCharacter, setSelectedCharacter] =
+  const [username, setUsername] = useState("");
+  const [selectedCharacter, setSelectedCharacter] =
     useState<CharacterName>("doux");
-  const [connectionDetails, setConnectionDetails] =
-    useState<ConnectionDetails | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const isMobile = useMobile();
 
   useEffect(() => {
     getCookie("username").then((cookie) => {
       setUsername(cookie || "");
     });
-  },[]);
+  }, []);
 
   const requestConnectionDetails = useCallback(
     async (username: string) => {
@@ -77,6 +77,7 @@ export default function Page() {
           onSubmit={async (e) => {
             e.preventDefault();
             try {
+              setIsLoading(true);
               const connectionDetails = await requestConnectionDetails(
                 username
               );
@@ -84,6 +85,7 @@ export default function Page() {
               router.push(`/room/${connectionDetails.slug}?wsUrl=${encodeURIComponent(connectionDetails.wsUrl)}&token=${encodeURIComponent(connectionDetails.token)}&roomName=${encodeURIComponent(roomName)}`);
             } catch (e: any) {
               toast.error(e);
+              setIsLoading(false);
             }
           }}
         >
@@ -98,9 +100,9 @@ export default function Page() {
             variant={"default"}
             size={"lg"}
             className={styles.button}
-            disabled={!username && username.length < 3}
+            disabled={!username || username.length < 3 || isLoading}
           >
-            Join Room
+            {isLoading ? <Loader /> : "Join Room"}
           </Button>
         </form>
       </div>

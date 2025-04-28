@@ -13,10 +13,13 @@ import { IsAuthorizedWrapper } from '@/lib/dtel-auth/components/IsAuthorizedWrap
 import { LoginButton } from '@/lib/dtel-auth/components';
 import { Leaderboard } from '@/components/ui/Leaderboard/Leaderboard';
 import { getCookie, setCookie } from '@/app/actions';
+import { Loader } from '@dtelecom/components-react';
 
 export default function Home() {
   const router = useRouter();
   const [roomName, setRoomName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     getCookie("roomName").then((cookie) => {
@@ -31,8 +34,15 @@ export default function Home() {
       toast.error("Please enter a room name");
       return;
     }
-    await setCookie("roomName", roomName, window.location.origin);
-    router.push(`/createRoom?roomName=${encodeURIComponent(roomName)}`);
+    try {
+      setIsLoading(true);
+
+      await setCookie("roomName", roomName, window.location.origin);
+      router.push(`/createRoom?roomName=${encodeURIComponent(roomName)}`);
+    } catch (e) {
+      console.error(e);
+      setIsLoading(false);
+    }
   }, [roomName, router]);
 
   return (
@@ -73,7 +83,7 @@ export default function Home() {
             className={styles.button}
             disabled={!roomName}
           >
-            Create a Room
+            {isLoading ? <Loader /> : "Create a Room"}
           </Button>
         </form>
       </div>

@@ -73,7 +73,7 @@ export async function POST(
     canPublish: true,
     canPublishData: true,
   });
-  token.metadata = JSON.stringify({ character, admin: true });
+  token.metadata = JSON.stringify({ character, admin: true, project: process.env.PROJECT_NAME });
   token.webHookURL = userId && process.env.NEXT_PUBLIC_POINTS_BACKEND_URL
     ? `https://${process.env.NEXT_PUBLIC_POINTS_BACKEND_URL}/api/webhook`
     : undefined;

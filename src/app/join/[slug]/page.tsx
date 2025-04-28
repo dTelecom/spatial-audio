@@ -13,6 +13,7 @@ import { ConnectionDetailsBody } from '@/app/api/join/route';
 import { getCookie, setCookie } from '@/app/actions';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useMobile } from '@/util/useMobile';
+import { Loader } from '@dtelecom/components-react';
 
 export default function Page() {
   const router = useRouter();
@@ -22,6 +23,7 @@ export default function Page() {
   const [username, setUsername] = useState("");
   const [selectedCharacter, setSelectedCharacter] =
     useState<CharacterName>("doux");
+  const [isLoading, setIsLoading] = useState(false);
   const isMobile = useMobile();
 
   useEffect(() => {
@@ -80,6 +82,7 @@ export default function Page() {
           onSubmit={async (e) => {
             e.preventDefault();
             try {
+              setIsLoading(true);
               const connectionDetails = await requestConnectionDetails(
                 username
               );
@@ -88,6 +91,7 @@ export default function Page() {
               );
             } catch (e: any) {
               toast.error(e);
+              setIsLoading(false);
             }
           }}
         >
@@ -102,9 +106,9 @@ export default function Page() {
             variant={"default"}
             size={"lg"}
             className={styles.button}
-            disabled={!username && username.length < 3}
+            disabled={!username || username.length < 3 || isLoading}
           >
-            Join Room
+            {isLoading ? <Loader /> : "Join Room"}
           </Button>
         </form>
       </div>
