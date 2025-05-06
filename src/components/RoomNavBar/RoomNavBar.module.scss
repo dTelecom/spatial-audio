@@ -1,112 +1,23 @@
-.container {
-	height: 56px;
-	padding: 14px 16px;
-	display: flex;
-	align-items: center;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	justify-content: space-between;
-	background: #000000;
-	z-index: 1;
+.copyButton {
+	height: 36px;
+	border-radius: 10px;
 
 	@media (max-width: 1023px) {
-		height: 56px;
-		padding-top: 8px;
-		padding-bottom: 8px;
-	}
-
-	&.small {
-		height: 64px;
-
-		.link {
-			svg {
-				height: 40px;
-				width: 134px;
-
-				@media (max-width: 1023px) {
-					height: 32px;
-					width: 98px;
-				}
-			}
-
-		}
-	}
-
-	.link {
-		width: 100%;
-		display: flex;
-	}
-
-	h2 {
-		width: 100%;
-		font-size: 24px;
-		font-weight: 700;
-		text-align: center;
-		color: #777575;
-
-		@media (max-width: 1023px) {
-			font-size: 18px;
-			text-align: right;
-		}
-	}
-
-	.counter {
-		width: 100%;
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-		gap: 16px;
-		@media (max-width: 600px) {
-			gap: 8px;
-		}
-
-		.counterContent {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 4px;
-			background: #2E3031;
-			border-radius: 5px;
-			padding: 6px 12px;
-			font-size: 14px;
-		}
-	}
-
-	.copyButton {
-		height: 32px;
+		background-color: #59E970 !important;
+		color: #252728 !important;
+		font-size: 0 !important;
 		border-radius: 5px;
-		display: flex;
-		gap: 8px;
-		padding: 8px 12px;
+		padding: 8px;
+		gap: 0;
+		height: 32px;
 
-		&:hover {
-			opacity: 0.8;
-		}
-
-		@media (max-width: 600px) {
-			background-color: #59E970 !important;
-			color: #252728 !important;
-			font-size: 0 !important;
-			padding: 8px;
-			gap: 0;
-			height: 32px;
-
-			& > svg {
-				width: 16px;
-				height: 16px;
-			}
-		}
-
-		&.copied {
-			opacity: 0.8;
+		& > svg {
+			width: 16px;
+			height: 16px;
 		}
 	}
-}
 
-main:has(.small) {
-	padding-top: 0 !important;
-	padding-bottom: 0;
+	&.copied {
+		opacity: 0.8;
+	}
 }

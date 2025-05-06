@@ -11,7 +11,7 @@ import styles from './Index.module.scss';
 import {Footer} from "@/components/Footer/Footer";
 import { IsAuthorizedWrapper } from '@/lib/dtel-auth/components/IsAuthorizedWrapper';
 import { LoginButton } from '@/lib/dtel-auth/components';
-import { Leaderboard } from '@/components/ui/Leaderboard/Leaderboard';
+import { Leaderboard } from '@/lib/dtel-common/Leaderboard/Leaderboard';
 import { getCookie, setCookie } from '@/app/actions';
 import { Loader } from '@dtelecom/components-react';
 
@@ -57,13 +57,13 @@ export default function Home() {
           />
         </IsAuthorizedWrapper>
 
-        <LoginButton />
+        <LoginButton fullTitle />
       </NavBar>
 
       <div className={styles.container}>
         <h1 className={styles.title}>Create a Spatial Meeting<br/>and Get Points</h1>
 
-        <p className={styles.description}>{'Free, open-source, 2D world where you can\ninteract, see, and hear others with spatial\nstereo audio. Powered by '}<a
+        <p className={styles.text}>{'Free, open-source, 2D world where you can\ninteract, see, and hear others with spatial\nstereo audio. Powered by '}<a
           href={'https://video.dtelecom.org/'}
           target={'_blank'}
           rel={'noreferrer'}
@@ -81,7 +81,7 @@ export default function Home() {
             variant={"default"}
             size={"lg"}
             className={styles.button}
-            disabled={!roomName}
+            disabled={!roomName || isLoading || roomName.length < 3}
           >
             {isLoading ? <Loader /> : "Create a Room"}
           </Button>

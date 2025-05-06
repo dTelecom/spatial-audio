@@ -1,74 +1,93 @@
-import Link from "next/link";
-import React, {useState} from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { NavBar } from "@/components/NavBar/NavBar";
+import { ParticipantsBadge } from "@/components/ParticipantsBadge/ParticipantsBadge";
+import { Button } from "@/components/Button";
+import { clsx } from "clsx";
+import { ChainIcon, TickIcon } from "@/assets";
 import styles from "./RoomNavBar.module.scss";
-import {clsx} from "clsx";
-import Logo from '../icons/logo.svg';
-import {RoomEvent, Track} from "@dtelecom/livekit-client";
-import {useTracks} from "@dtelecom/components-react";
-import ParticipantsIcon from "../icons/participants.svg";
-import {Button} from "@/components/Button";
-import TickIcon from "@/components/icons/tick.svg";
-import ChainIcon from "@/components/icons/chain.svg";
-import {useMobile} from "@/util/useMobile";
+import { useTracks } from "@dtelecom/components-react";
+import { RoomEvent, Track } from "@dtelecom/livekit-client";
+import axios from "axios";
+import { usePrivy } from "@privy-io/react-auth";
+import { Leaderboard } from "@/lib/dtel-common/Leaderboard/Leaderboard";
+import { isMobileBrowser } from "@dtelecom/components-core";
+import { IsAuthorizedWrapper } from "@/lib/dtel-auth/components/IsAuthorizedWrapper";
 
-interface Props extends React.PropsWithChildren {
-  title?: string;
-  small?: boolean;
-  showCounter?: boolean;
-  slug?: string;
+interface RoomNavBarProps {
+  slug: string;
+  roomName: string;
+  iconFull?: boolean;
+  isAdmin?: boolean;
+  token?: string;
 }
 
-export function RoomNavBar({title, small, slug}: Props) {
-  const isMobile = useMobile();
+export const RoomNavBar = ({ slug, roomName, iconFull, isAdmin, token }: RoomNavBarProps) => {
+  const { authenticated } = usePrivy();
+  const isMobile = React.useMemo(() => isMobileBrowser(), []);
   const tracks = useTracks(
     [
-      {source: Track.Source.Camera, withPlaceholder: true},
-      {source: Track.Source.ScreenShare, withPlaceholder: false}
+      { source: Track.Source.Camera, withPlaceholder: true },
+      { source: Track.Source.ScreenShare, withPlaceholder: false },
+      { source: Track.Source.Microphone, withPlaceholder: true }
     ],
-    {updateOnlyOn: [RoomEvent.ActiveSpeakersChanged]}
+    { updateOnlyOn: [RoomEvent.ActiveSpeakersChanged] }
   );
+
   const [copied, setCopied] = useState(false);
   const copy = async () => {
-    const url = `${window.location.origin}/join/${slug}?roomName=${encodeURIComponent(title || "")}`;
+    const url = encodeURI(
+      `${window.location.origin}/join/${slug}?roomName=${roomName}`
+    );
     await navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const count = useMemo(() => {
+    const identities = Array.from(new Set(tracks.map((t) => t.participant.identity)));
+    return identities.length;
+  }, [tracks]);
+
   return (
-    <header className={clsx(styles.container, small && styles.small)}>
-      <Link
-        href="/"
-        className={styles.link}
+    <NavBar
+      title={roomName}
+      small
+      iconFull={iconFull}
+      divider={authenticated}
+      smallTitle={isMobile}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px"
+        }}
       >
-        <Logo height={32} width={98}/>
-      </Link>
-
-      {title && !isMobile && (
-        <h2>{decodeURI(title)}</h2>
-      )}
-
-      <div className={styles.counter}>
-        {title && isMobile && (
-          <h2>{decodeURI(title)}</h2>
-        )}
-
-        <div className={styles.counterContent}>
-          <ParticipantsIcon/>
-          {tracks.length}
-        </div>
+        <ParticipantsBadge count={count} />
 
         <Button
           onClick={() => {
             void copy();
           }}
-          className={clsx("lk-button", styles.copyButton, copied && styles.copied)}
+          className={clsx(
+            "lk-button",
+            styles.copyButton,
+            copied && styles.copied
+          )}
           size={"sm"}
           variant={"default"}
         >
-          {copied ? <TickIcon/> : <ChainIcon />}{copied ? "Copied" : "Copy invite link"}
+          <span>{copied ? <TickIcon /> : <ChainIcon />}</span>
+          <span>{copied ? "Copied" : "Copy"}</span>
         </Button>
       </div>
-    </header>
+
+      <IsAuthorizedWrapper>
+        <Leaderboard
+          showPoints
+          isAdmin={isAdmin}
+        />
+      </IsAuthorizedWrapper>
+    </NavBar>
   );
-}
+};
