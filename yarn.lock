@@ -902,20 +902,20 @@
     loglevel "^1.8.1"
     rxjs "^7.8.0"
 
-"@dtelecom/components-react@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@dtelecom/components-react/-/components-react-1.0.39.tgz#171b298e0e64c4b022ec873362cca32bf0e36165"
-  integrity sha512-lTKJm/l0kfHPyeJcvVagV2q9ZYvISuzuNty1pkgxvurIDSaJuWqQ5yXXySaApksAdDQJdelFlf18f/TnRvM3qw==
+"@dtelecom/components-react@^1.0.42":
+  version "1.0.42"
+  resolved "https://registry.yarnpkg.com/@dtelecom/components-react/-/components-react-1.0.42.tgz#c87c7289972ea09f76907f90156ed5561163ed8d"
+  integrity sha512-6/Kr6V/B0eGYJki4Nv/w1wrMrTkVJ9XmrZ+eyd4TDfjcaDE4srtwt+iXAe12mK8qgW+gycpTIxja7bNLxI8DRg==
   dependencies:
     "@dtelecom/components-core" "0.6.19"
     "@react-hook/latest" "^1.0.3"
     clsx "^1.2.1"
     country-flags-svg "^2.0.0-beta.1"
 
-"@dtelecom/components-styles@^1.0.21":
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/@dtelecom/components-styles/-/components-styles-1.0.21.tgz#c7d0fb69eb2d673cd5096bd96c7ab2d3a5ee367d"
-  integrity sha512-rNieefVS5MU8WMjgPhLm7PqRb9jGJgTh/I5gnel39z1LOyJU2VXwDLng53jbi/Bn7L4EJd/tHDhUs+sC3uLz1Q==
+"@dtelecom/components-styles@^1.0.26":
+  version "1.0.26"
+  resolved "https://registry.yarnpkg.com/@dtelecom/components-styles/-/components-styles-1.0.26.tgz#b337678773be17e1af7352f62a456fc8a85ff5df"
+  integrity sha512-zdXGM4xX6vFIeDRzZe6VibBm3NpA76ksyhNMDMxsYWgg0/Nr6+C/m5SBkXTokZMoDTQqmX1f02b7r6U5J5aBQw==
 
 "@dtelecom/livekit-client@^1.12.13":
   version "1.12.13"

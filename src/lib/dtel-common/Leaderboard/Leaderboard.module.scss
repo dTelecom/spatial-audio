@@ -6,6 +6,77 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
+
+	@media (max-width: 1023px) {
+		border-radius: 5px;
+		height: 32px;
+		width: 32px;
+	}
+
+	.leaderBoardButtonText {
+		display: none;
+	}
+
+	&.leaderBoardButtonAnimation {
+		border-color: #59E970;
+		background: #000000;
+		animation: leaderboardButtonAnimation 3s ease-in-out forwards;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		@keyframes leaderboardButtonAnimation {
+			0% {
+			}
+			25% {
+				border-color: #59E970;
+			}
+			75% {
+				border-color: #59E970;
+			}
+			100% {
+				border-color: #2E3031;
+			}
+		}
+
+		.leaderBoardButtonText {
+			opacity: 0;
+			background: #000000;
+			border-radius: 10px;
+			position: absolute;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #59E970;
+			font-weight: 700;
+			font-size: 14px;
+			line-height: 140%;
+			text-align: center;
+			animation: leaderboardButtonTextAnimation 3s ease-in-out forwards;
+
+			@media (max-width: 1023px) {
+				font-size: 12px;
+				line-height: 100%;
+			}
+
+			@keyframes leaderboardButtonTextAnimation {
+				0% {
+					opacity: 0;
+				}
+				25% {
+					opacity: 1;
+				}
+				75% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+		}
+	}
 }
 
 .leaderboardModalWrapper {
@@ -27,7 +98,7 @@
 		max-height: 90%;
 		overflow-y: auto;
 
-		@media (max-width: 600px) {
+		@media (max-width: 1023px) {
 			padding: 24px;
 		}
 
@@ -50,7 +121,7 @@
 			align-items: center;
 			margin-bottom: 24px;
 
-			@media (max-width: 600px) {
+			@media (max-width: 1023px) {
 				margin-bottom: 12px;
 			}
 
@@ -61,7 +132,7 @@
 				letter-spacing: 0em;
 				white-space: pre-line;
 
-				@media (max-width: 600px) {
+				@media (max-width: 1023px) {
 					font-size: 18px;
 					line-height: 100%;
 				}
@@ -89,7 +160,7 @@
 				text-align: left;
 				border-radius: 5px;
 
-				@media (max-width: 600px) {
+				@media (max-width: 1023px) {
 					height: 28px;
 					font-size: 14px;
 				}
@@ -111,12 +182,17 @@
 				line-height: 140%;
 				box-sizing: border-box;
 
-				@media (max-width: 600px) {
+				&:hover {
+					border-color: #FFFFFF;
+				}
+
+				@media (max-width: 1023px) {
 					height: 28px;
 					font-size: 14px;
 					gap: 2px;
 					padding-left: 10px;
 					padding-right: 14px;
+
 					svg {
 						transform: translateX(-10%) scale(.8)
 					}
@@ -155,7 +231,7 @@
 			padding: 0 16px;
 			margin-bottom: 16px;
 
-			@media (max-width: 600px) {
+			@media (max-width: 1023px) {
 				font-size: 11px;
 			}
 
@@ -234,7 +310,7 @@
 			letter-spacing: 0em;
 			text-align: left;
 
-			@media (max-width: 600px) {
+			@media (max-width: 1023px) {
 				font-weight: 400;
 				font-size: 13px;
 			}
@@ -246,7 +322,7 @@
 			border: 1px solid #2E3031;
 			width: 100%;
 
-			@media (max-width: 600px) {
+			@media (max-width: 1023px) {
 				margin: 22px 0 16px;
 			}
 
@@ -258,7 +334,7 @@
 				line-height: 100%;
 				letter-spacing: 0em;
 				text-align: left;
-				@media (max-width: 600px) {
+				@media (max-width: 1023px) {
 					padding: 8px 16px;
 				}
 			}
@@ -268,7 +344,7 @@
 				display: flex;
 				flex-direction: column;
 				gap: 12px;
-				@media (max-width: 600px) {
+				@media (max-width: 1023px) {
 					padding: 16px 16px 14px;
 					gap: 14px;
 				}
@@ -277,7 +353,7 @@
 					display: flex;
 					align-items: center;
 
-					@media (max-width: 600px) {
+					@media (max-width: 1023px) {
 						align-items: flex-start;
 						flex-direction: column;
 					}
@@ -298,7 +374,7 @@
 						height: fit-content;
 						margin-right: 16px;
 
-						@media (max-width: 600px) {
+						@media (max-width: 1023px) {
 							margin-bottom: 8px;
 						}
 					}
@@ -341,7 +417,7 @@
 			letter-spacing: 0em;
 			text-align: left;
 
-			@media (max-width: 600px) {
+			@media (max-width: 1023px) {
 				font-weight: 400;
 				font-size: 13px;
 				margin-top: 12px;
@@ -354,7 +430,7 @@
 
 		.header {
 			margin-bottom: 16px;
-			@media (max-width: 600px) {
+			@media (max-width: 1023px) {
 				margin-bottom: 8px;
 			}
 		}

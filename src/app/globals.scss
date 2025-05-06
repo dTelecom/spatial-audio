@@ -40,6 +40,14 @@ main {
   padding-top: 96px;
   padding-bottom: 45px;
 
+  &:has(.lk-room-container) {
+    padding-bottom: 0px;
+  }
+
+  @media (max-width: 1023px) {
+    padding-top: 56px;
+  }
+
   button {
     outline: none;
     box-shadow: none !important;
@@ -89,7 +97,7 @@ main {
     padding-right: 32px;
     width: 200px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 1023px) {
       width: 100px;
     }
   }
@@ -186,7 +194,6 @@ main {
   }
 
   .lk-room-wrapper {
-    padding-top: 64px;
     height: 100vh;
   }
 

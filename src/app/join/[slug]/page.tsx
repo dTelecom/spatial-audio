@@ -14,6 +14,9 @@ import { getCookie, setCookie } from '@/app/actions';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useMobile } from '@/util/useMobile';
 import { Loader } from '@dtelecom/components-react';
+import { IsAuthorizedWrapper } from '@/lib/dtel-auth/components/IsAuthorizedWrapper';
+import { Leaderboard } from '@/lib/dtel-common/Leaderboard/Leaderboard';
+import { LoginButton } from '@/lib/dtel-auth/components';
 
 export default function Page() {
   const router = useRouter();
@@ -61,11 +64,34 @@ export default function Page() {
   );
   return (
     <>
-      <NavBar />
+      <NavBar
+        title={roomName}
+        small
+        iconFull={!isMobile}
+        divider
+        smallTitle={isMobile}
+      >
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
+          <IsAuthorizedWrapper>
+            <Leaderboard
+              buttonStyle={{
+                marginRight: "8px"
+              }}
+            />
+          </IsAuthorizedWrapper>
+
+          <LoginButton />
+        </div>
+      </NavBar>
       <Toaster />
       <div
         style={{
-          flex: isMobile ? '1' : undefined
+          flex: isMobile ? '1' : undefined,
+          padding: "0 16px"
         }}
         className={styles.container}
       >

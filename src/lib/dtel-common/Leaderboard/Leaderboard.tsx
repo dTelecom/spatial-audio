@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Leaderboard.module.scss";
 import { ChainIcon, CloseIcon, InfoIcon, LeaderboardIcon, TickIcon } from "@/assets";
 import axios from "axios";
@@ -8,7 +8,6 @@ import { getInviteCode, INVITE_CODE_QUERY_KEY } from "@/lib/hooks/useInviteCode"
 import { CopyIcon } from "lucide-react";
 import { ADMIN_POINTS_MULTIPLIER, BASE_REWARDS_PER_MINUTE, REFERRAL_REWARD_PERCENTAGE } from "@/lib/constants";
 import { getAccessToken } from "@privy-io/react-auth";
-import { createPortal } from 'react-dom';
 
 interface LeaderboardRecord {
   position: number;
@@ -19,23 +18,25 @@ interface LeaderboardRecord {
 
 interface Leaderboard {
   buttonStyle?: CSSProperties;
+  showPoints?: boolean;
+  isAdmin?: boolean;
 }
 
 const description = {
-  title: "Use Spatial and Get Points",
-  text: "We have launched a campaign for early adopters who use Spatial, create and participate in immersive meetings.",
+  title: "Use dMeet and Get Points",
+  text: "We have launched a campaign for early adopters who use dMeet, create and participate in audio/video meetings.",
   rules: {
     title: "Point Earning Rules:",
     items: [
       {
         badge: "Host",
         text: `${BASE_REWARDS_PER_MINUTE * ADMIN_POINTS_MULTIPLIER} points/minute`,
-        text2: "for hosting a Spatial meeting (with 1+ participant required)"
+        text2: "for hosting a meeting\n(with 1+ participant required)"
       },
       {
         badge: "Participant",
         text: `${BASE_REWARDS_PER_MINUTE} points/minute`,
-        text2: "for attending\na Spatial meeting"
+        text2: "for attending\na meeting"
       },
       {
         badge: "Referral",
@@ -46,17 +47,40 @@ const description = {
   },
   footer: {
     text: "Points will be exchanged for the utility token $DTEL.",
-    text2: "We will 💎 reward active campaign participants for their commitment to Spatial."
+    text2: "We will 💎 reward the active campaign participants for their commitment to the dMeet."
   }
 };
 
-export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
+export const Leaderboard = ({ buttonStyle, showPoints, isAdmin }: Leaderboard) => {
   const [open, setOpen] = useState(false);
   const [leaderboard, setLeaderboard] = useState<LeaderboardRecord[]>([]);
   const [instructionOpen, setInstructionOpen] = useState(false);
   const [referralLink, setReferralLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [initialRequestReturnedData, setInitialRequestReturnedData] = useState(false);
+  const [animationActive, setAnimationActive] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (showPoints) {
+      const interval = setInterval(() => {
+        setAnimationActive((prev) => !prev);
+        setTimeout(() => {
+          setAnimationActive(false);
+        }, 3000);
+      }, 60000);
+
+      return () => clearInterval(interval);
+    }
+  }, [showPoints]);
 
   const getPoints = async () => {
     try {
@@ -87,18 +111,16 @@ export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
       if (!leaderboard) {
         setOpen(false);
       }
-      if (process.env.NODE_ENV !== "development") {
-        setTimeout(() => {
-          void getPoints();
-        }, 5000);
-      }
+
+      timeoutRef.current = setTimeout(() => {
+        void getPoints();
+      }, 5000);
     }
   };
 
   useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
-      void getPoints();
-    }
+    void getPoints();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const currentUserPoints = useMemo(() => {
@@ -118,12 +140,23 @@ export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if (process.env.NODE_ENV !== "development" && !initialRequestReturnedData) {
+  if (!initialRequestReturnedData) {
     return null;
   }
 
-  const modalContent: any = (
+  return (
     <>
+      <button
+        style={buttonStyle}
+        onClick={onOpen}
+        className={clsx(styles.leaderBoardButton, animationActive && showPoints && styles.leaderBoardButtonAnimation)}
+      >
+        <LeaderboardIcon />
+        <span className={styles.leaderBoardButtonText}>
+            +{isAdmin ? ADMIN_POINTS_MULTIPLIER * BASE_REWARDS_PER_MINUTE : BASE_REWARDS_PER_MINUTE}
+          </span>
+      </button>
+
       {open && !instructionOpen && (
         <div
           onClick={(e) => {
@@ -237,13 +270,17 @@ export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
 
               <div className={styles.blockBody}>
                 {description.rules.items.map((item, index) => (
-                  <div className={styles.blockRow} key={index}>
+                  <div
+                    className={styles.blockRow}
+                    key={index}
+                  >
                     <span className={styles.blockBadge}>{item.badge}</span>
                     <div className={styles.rewardBlockWrapper}>
                       <div className={styles.rewardBlock}>
                         <div>
-                          <span className={styles.rewardBlockGreenText}>{item.text.split('/minute')[0]}</span>
-                          {item.text.includes('/minute') && "/minute"}&nbsp;<span className={styles.rewardBlockGrayText}>{item.text2}</span>
+                          <span className={styles.rewardBlockGreenText}>{item.text.split("/minute")[0]}</span>
+                          {item.text.includes("/minute") && "/minute"}&nbsp;
+                          <span className={styles.rewardBlockGrayText}>{item.text2}</span>
                         </div>
 
                       </div>
@@ -265,30 +302,14 @@ export const Leaderboard = ({ buttonStyle }: Leaderboard) => {
               {description.footer.text2}
             </p>
 
-            {/*<a className={styles.learMoreLink} href={''}>{'Learn More >'}</a>*/}
+            <a
+              className={styles.learMoreLink}
+              href={"https://www.dtelecom.org/airdrop"}
+              target={"_blank"}
+            >{"Learn More >"}</a>
           </div>
         </div>
       )}
-    </>
-  )
-
-  const modal = createPortal(modalContent, document.body, 'leaderboard-modal');
-
-  if (!initialRequestReturnedData && process.env.NODE_ENV === "production") {
-    return null;
-  }
-
-  return (
-    <>
-      <button
-        style={buttonStyle}
-        onClick={onOpen}
-        className={styles.leaderBoardButton}
-      >
-        <LeaderboardIcon />
-      </button>
-
-      {modal}
     </>
   );
 };
