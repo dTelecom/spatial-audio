@@ -12,7 +12,7 @@
     "@dtelecom/components-react": "^1.0.42",
     "@dtelecom/components-styles": "^1.0.27",
     "@dtelecom/livekit-client": "^1.12.13",
-    "@dtelecom/server-sdk-js": "^2.0.10",
+    "@dtelecom/server-sdk-js": "^2.0.11",
     "@pixi/react": "^7.1.2",
     "@pixi/tilemap": "^3.2.2",
     "@pixi/unsafe-eval": "^7.4.3",
