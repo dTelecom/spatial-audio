@@ -891,10 +891,10 @@
     eventemitter3 "^5.0.1"
     preact "^10.24.2"
 
-"@dtelecom/components-core@0.6.19":
-  version "0.6.19"
-  resolved "https://registry.yarnpkg.com/@dtelecom/components-core/-/components-core-0.6.19.tgz#3a5ff3835c95ffc7007cd87b9a1d8f08d2dcb149"
-  integrity sha512-adGyA+5/l1VKGna/RFg/GDwYXPr/FU+17vOq9AxMHtrRanZE4KGKMGkBYS6yjM++Ol8dfWK3PGdTLBu06XT7qA==
+"@dtelecom/components-core@0.6.20":
+  version "0.6.20"
+  resolved "https://registry.yarnpkg.com/@dtelecom/components-core/-/components-core-0.6.20.tgz#0807c845d99b130b9940128d4229608c5406083e"
+  integrity sha512-0AelKqQZuX1xBhR1OaXeSKgGARGnXVzTlb1vgnzMDqgMTuPYUqZcg5W5Ac0kjjrtxlIHmj5YBfvXFW5NTgqPcA==
   dependencies:
     "@floating-ui/dom" "^1.1.0"
     email-regex "^5.0.0"
@@ -902,12 +902,12 @@
     loglevel "^1.8.1"
     rxjs "^7.8.0"
 
-"@dtelecom/components-react@^1.0.42":
-  version "1.0.42"
-  resolved "https://registry.yarnpkg.com/@dtelecom/components-react/-/components-react-1.0.42.tgz#c87c7289972ea09f76907f90156ed5561163ed8d"
-  integrity sha512-6/Kr6V/B0eGYJki4Nv/w1wrMrTkVJ9XmrZ+eyd4TDfjcaDE4srtwt+iXAe12mK8qgW+gycpTIxja7bNLxI8DRg==
+"@dtelecom/components-react@^1.0.45":
+  version "1.0.45"
+  resolved "https://registry.yarnpkg.com/@dtelecom/components-react/-/components-react-1.0.45.tgz#3aa56929c9f28dbb324f7102b28d12c14bdc8f79"
+  integrity sha512-uF7o69TPr8B9SENRcl5k+A2W79GQwvqXHkyWKtDMEa0NpmasVNzmkcwq44Uuvixc40SddXis0VLFhIFTOIx5Fg==
   dependencies:
-    "@dtelecom/components-core" "0.6.19"
+    "@dtelecom/components-core" "0.6.20"
     "@react-hook/latest" "^1.0.3"
     clsx "^1.2.1"
     country-flags-svg "^2.0.0-beta.1"
@@ -917,10 +917,10 @@
   resolved "https://registry.yarnpkg.com/@dtelecom/components-styles/-/components-styles-1.0.27.tgz#977d0eab23c9b50c545c495d08a906f0521d3f60"
   integrity sha512-O486NEx6LI957V2yKR/eak2o29jVYVpQcyj9P2+yktyAm6WbhEzDwj9whWMwb1uemvytEOJkS9E+SYxPc+vRyQ==
 
-"@dtelecom/livekit-client@^1.12.13":
-  version "1.12.13"
-  resolved "https://registry.yarnpkg.com/@dtelecom/livekit-client/-/livekit-client-1.12.13.tgz#ff88f2cd4de084ea41fac9b784d63ecc5332d366"
-  integrity sha512-USPstEW48KEarpWzmc/CZO1mL6LDesihBcIAPihnB+EWo2fqEarb1UOkJY/Z0fApWW6ZeE8Bw6rusKejTreN2Q==
+"@dtelecom/livekit-client@^1.12.15":
+  version "1.12.15"
+  resolved "https://registry.yarnpkg.com/@dtelecom/livekit-client/-/livekit-client-1.12.15.tgz#63f74fa1204edb7bb4fe71ff2af02565ebf47132"
+  integrity sha512-lTFgbKM0sv+Lu1/StNxNg85x3XYYfti7BNC4CvgMD+RThhD/9hnJeGNXKh0/6rxsNC4f8juXmtsIeyJvnRZjzA==
   dependencies:
     eventemitter3 "^5.0.1"
     loglevel "^1.8.0"
