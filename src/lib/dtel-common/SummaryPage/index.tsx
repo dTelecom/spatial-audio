@@ -290,7 +290,7 @@ const ThankYouPage = () => {
 
       <div className={styles.socialBlock}>
         <a
-          href="https://x.com/DTEL_org"
+          href="https://x.com/dtelecom"
           target="_blank"
           rel="noopener noreferrer"
         ><XIcon />X/Twitter</a>
