@@ -21,7 +21,7 @@ export const Footer = () => {
             Docs
           </a>
         )}
-        <a target={"_blank"} href={"https://twitter.com/DTEL_org"}>
+        <a target={"_blank"} href={"https://x.com/dtelecom"}>
           <TwitterIcon />
         </a>
         <a target={"_blank"} href={"https://discord.gg/VSSG2zQsJr"}>
