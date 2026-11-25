@@ -1,10 +1,10 @@
-# Demo
+# Spatial audio demo
 
-Try it for free at https://spatial.dmeet.org
+This example places participants in a 2D world and adjusts stereo audio according to their position and distance. Its server signs participant tokens locally with the older dTelecom server SDK.
 
-A tiny 2D world you can join, navigate, and both see and hear other users, experiencing their audio in stereo according to their relative position and distance.
+For a new Cloud project, use [dTelecom Meet](https://github.com/dTelecom/dtelecom-meet). Its README walks through issuing a Cloud token and connecting to the room.
 
-## Running locally
+## Running the historical example locally
 
 Clone the repo and install dependencies:
 
@@ -14,14 +14,7 @@ cd spatial-audio
 npm install
 ```
 
-Create a new project at <https://cloud.dtelecom.org>. Then create a new key in your [project settings](https://cloud.dtelecom.org/settings).
-
-Create a new file at `spatial-audio/.env.development` and add your new API key and secret:
-
-```
-API_KEY=<your api key>
-API_SECRET=<your api secret>
-```
+The original app expects a registered signing keypair in `API_KEY` and `API_SECRET`. Project keys from dTelecom Cloud use a different token flow.
 
 (Note: this file is in `.gitignore`. Never commit your API secret to git.)
 
@@ -32,14 +25,6 @@ npm run dev
 ```
 
 You can test it by opening <http://localhost:3000> in a browser.
-
-## Deploying for production
-
-This demo is a Next.js app. You can deploy to your Vercel account with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/dTelecom/spatial-audio&env=API_KEY,API_SECRET&envDescription=Sign%20up%20for%20an%20account%20at%20https://cloud.dtelecom.org%20and%20create%20an%20API%20key%20in%20the%20Project%20Settings%20UI)
-
-Refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more about deploying to a production environment.
 
 ## Asset credits
 
